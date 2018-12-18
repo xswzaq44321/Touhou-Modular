@@ -6,7 +6,6 @@ public class Trace : MonoBehaviour {
 
     // Use this for initialization
     public string target;
-    private float range;
     void Start () {
 
 	}
@@ -16,17 +15,15 @@ public class Trace : MonoBehaviour {
     }
 
     //trace//
-    private void OnTriggerStay2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log(collider.gameObject.tag);
-        if(collider.gameObject.tag == target)
-            transform.GetComponent<Shoot>().direction = collider.transform.position - transform.position;
+        if (col.gameObject.tag == target)
+            transform.GetComponent<Shoot>().direction = col.transform.position - transform.position;
     }
 
     public void set_range(float radius)
     {
-        range = radius;
-        GetComponent<CircleCollider2D>().radius = radius;
+        GetComponents<CircleCollider2D>()[1].radius = radius;
     }
 
 }

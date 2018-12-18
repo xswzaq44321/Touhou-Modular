@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour {
             delay_time_long = 0;
             GameObject bullet = Instantiate(trace_bullet);
             bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
-            //bullet.GetComponent<Trace>().set_range(30);
+            bullet.GetComponent<Trace>().set_range(3);
             bullet.transform.position = transform.position;
         }
 

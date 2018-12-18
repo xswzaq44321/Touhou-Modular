@@ -6,6 +6,7 @@ public class Shoot : MonoBehaviour {
 
     public Vector3 direction;
     public float speed, rotation = 0;
+    public int atk;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,4 +19,19 @@ public class Shoot : MonoBehaviour {
         //Debug.Log(transform.position);
         if (transform.position.y > 10) Destroy(gameObject);
 	}
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (tag == "PlayerBullet" && col.gameObject.tag == "Enemy")
+        {
+            col.gameObject.GetComponent<Health>().HP -= atk;
+            Destroy(gameObject);
+        }
+        else if(tag == "EnemyBullet" && col.gameObject.tag == "Player")
+        {
+            col.gameObject.GetComponent<Health>().HP -= atk;
+            Destroy(gameObject);
+        }
+    }
+
 }
