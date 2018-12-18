@@ -17,10 +17,12 @@ public class Shoot : MonoBehaviour {
         transform.position += direction.normalized * speed * Time.deltaTime;
         transform.Rotate(0, 0, rotation);
         //Debug.Log(transform.position);
+        /*only destroy the one that surpass the upper screen,
+        haven't done the ones that surpass the other sides of the screen.*/
         if (transform.position.y > 10) Destroy(gameObject);
 	}
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (tag == "PlayerBullet" && col.gameObject.tag == "Enemy")
         {

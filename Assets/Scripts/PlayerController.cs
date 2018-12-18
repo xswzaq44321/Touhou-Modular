@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed, shoot_delay_short, shoot_delay_long;
-    public GameObject normal_bullet, trace_bullet;
+    public GameObject normal_bullet, trace_bullet, enemy;
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
 	// Use this for initialization
@@ -47,7 +47,8 @@ public class PlayerController : MonoBehaviour {
             delay_time_long = 0;
             GameObject bullet = Instantiate(trace_bullet);
             bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
-            bullet.GetComponent<Trace>().set_range(3);
+            bullet.GetComponent<Trace>().target = enemy;
+            bullet.GetComponent<Trace>().range = 3;
             bullet.transform.position = transform.position;
         }
 

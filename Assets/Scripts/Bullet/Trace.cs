@@ -5,25 +5,24 @@ using UnityEngine;
 public class Trace : MonoBehaviour {
 
     // Use this for initialization
-    public string target;
+    public GameObject target;
+    public float range;
+    private bool locked = false;
     void Start () {
 
 	}
 
     void Update() {
-
-    }
-
-    //trace//
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.tag == target)
-            transform.GetComponent<Shoot>().direction = col.transform.position - transform.position;
-    }
-
-    public void set_range(float radius)
-    {
-        GetComponents<CircleCollider2D>()[1].radius = radius;
+        for(int i = 0; i < target.transform.childCount; i++)
+        {
+            if (!locked && Vector2.Distance(target.transform.GetChild(i).transform.position, transform.position) <= range)
+            {
+                GetComponent<Shoot>().direction = target.transform.GetChild(i).transform.position - transform.position;
+                locked = true;
+                break;
+            }
+        }
+        
     }
 
 }
