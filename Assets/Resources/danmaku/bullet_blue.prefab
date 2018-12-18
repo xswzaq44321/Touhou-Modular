@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4008676960814002}
   - component: {fileID: 212598452086452432}
-  - component: {fileID: 58565071380498452}
-  - component: {fileID: 114599471840930478}
-  - component: {fileID: 114025442544308714}
   - component: {fileID: 50636896342957628}
+  - component: {fileID: 58565071380498452}
+  - component: {fileID: 114025442544308714}
+  - component: {fileID: 114524866030219218}
   m_Layer: 0
   m_Name: bullet_blue
   m_TagString: PlayerBullet
@@ -94,7 +94,7 @@ MonoBehaviour:
   speed: 20
   rotation: 10
   atk: 1
---- !u!114 &114599471840930478
+--- !u!114 &114524866030219218
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130872cd04cfe454b8ae3a6406c9fed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: Enemy
+  target: {fileID: 0}
+  range: 0
 --- !u!212 &212598452086452432
 SpriteRenderer:
   m_ObjectHideFlags: 1

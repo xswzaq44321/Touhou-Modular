@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject normal_bullet, trace_bullet, enemy;
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
+    private int power = 0, gonzo = 0;
 	// Use this for initialization
 	void Start () {
 		
