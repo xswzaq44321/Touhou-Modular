@@ -29,10 +29,14 @@ public class Shoot : MonoBehaviour {
             col.gameObject.GetComponent<Health>().HP -= atk;
             Destroy(gameObject);
         }
+        else if(tag == "EnemyBullet" && col.gameObject.tag == "HitPoint")
+        {
+            col.transform.parent.GetComponent<Health>().HP--;
+            Destroy(gameObject);
+        }
         else if(tag == "EnemyBullet" && col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Health>().HP -= atk;
-            Destroy(gameObject);
+            col.gameObject.GetComponent<PlayerController>().graze++;
         }
     }
 

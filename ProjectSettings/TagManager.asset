@@ -6,8 +6,11 @@ TagManager:
   tags:
   - Enemy
   - PlayerBullet
-  - pwoer
-  - point
+  - Power
+  - Point
+  - HitPoint
+  - EnemyBullet
+  - Tracker
   layers:
   - Default
   - TransparentFX

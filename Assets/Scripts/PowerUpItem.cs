@@ -15,5 +15,18 @@ public class PowerUpItem : MonoBehaviour {
 	void Update () {
         init_speed += (-9.8f - init_speed) * Time.deltaTime;
         transform.position += Vector3.up * init_speed * Time.deltaTime;
+        if (transform.position.y > 100) Destroy(gameObject);//need to change after the UI is completed
 	}
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            if (gameObject.tag == "Point")
+                col.GetComponent<PlayerController>().point++;
+            else if (gameObject.tag == "Power")
+                col.GetComponent<PlayerController>().power++;
+            Destroy(gameObject);
+        }
+    }
 }

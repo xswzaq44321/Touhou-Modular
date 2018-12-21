@@ -6,7 +6,7 @@ public class Trace : MonoBehaviour {
 
     // Use this for initialization
     public GameObject target;
-    public float range;
+    public float range = 100;
     private bool locked = false;
     void Start () {
 

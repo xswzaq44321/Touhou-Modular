@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject bullet;
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
-    private int power = 0, point = 0, gonzo = 0;
+    public int power = 15, point = 0, graze = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //basic launcher animation (rotate)//
+        transform.GetChild(0).Rotate(Vector3.back * 180 * Time.deltaTime);
+        transform.GetChild(1).Rotate(Vector3.forward * 180 * Time.deltaTime);
+
         //move//
         direction = Vector3.zero;
         if (Input.GetKey(KeyCode.UpArrow))
@@ -24,9 +28,17 @@ public class PlayerController : MonoBehaviour {
         else if (Input.GetKey(KeyCode.DownArrow))
             direction += Vector3.down;
         if (Input.GetKey(KeyCode.RightArrow))
+        {
             direction += Vector3.right;
+            GetComponent<Animator>().SetFloat("speedX", 10);
+        }
         else if (Input.GetKey(KeyCode.LeftArrow))
+        {
             direction += Vector3.left;
+            GetComponent<Animator>().SetFloat("speedX", -10);
+        }
+        else
+            GetComponent<Animator>().SetFloat("speedX", 0);
         if (Input.GetKey(KeyCode.LeftShift))
             transform.position += direction.normalized * speed * 0.7f * Time.deltaTime;
         else
@@ -85,18 +97,17 @@ public class PlayerController : MonoBehaviour {
             bullet.transform.position = transform.GetChild(0).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1, 0);
             bullet.GetComponent<Trace>().target = enemy;
-            bullet.GetComponent<Trace>().range = 100;
 
             //right side//
             bullet = Instantiate(trace_bullet);
             bullet.transform.position = transform.GetChild(1).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(1, 1, 0);
             bullet.GetComponent<Trace>().target = enemy;
-            bullet.GetComponent<Trace>().range = 100;
         }
+    }
 
-        //health bar//
-
+    private void OnTriggerEnter2D(Collider2D col)
+    {
 
     }
 }
