@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
             direction += Vector3.right;
         else if (Input.GetKey(KeyCode.LeftArrow))
             direction += Vector3.left;
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
             transform.position += direction.normalized * speed * 0.7f * Time.deltaTime;
         else
             transform.position += direction.normalized * speed * Time.deltaTime;
