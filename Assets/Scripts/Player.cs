@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
+public class Player : MonoBehaviour {
 
-    public int max_HP, HP;
+    public GameObject sprite;
 	// Use this for initialization
 	void Start () {
-        
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+		
 	}
-
 }

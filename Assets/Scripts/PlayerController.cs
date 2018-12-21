@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject bullet;
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
-    public int power = 15, point = 0, graze = 0;
+    public int power = 15, point = 0, graze = 0, max_HP, HP;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //basic launcher animation (rotate)//
-        transform.GetChild(0).Rotate(Vector3.back * 180 * Time.deltaTime);
-        transform.GetChild(1).Rotate(Vector3.forward * 180 * Time.deltaTime);
 
         //move//
         direction = Vector3.zero;
@@ -95,19 +92,20 @@ public class PlayerController : MonoBehaviour {
             //left side//
             bullet = Instantiate(trace_bullet);
             bullet.transform.position = transform.GetChild(0).position;
-            bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1, 0);
+            bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1.732f, 0);
             bullet.GetComponent<Trace>().target = enemy;
 
             //right side//
             bullet = Instantiate(trace_bullet);
             bullet.transform.position = transform.GetChild(1).position;
-            bullet.GetComponent<Shoot>().direction = new Vector3(1, 1, 0);
+            bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
             bullet.GetComponent<Trace>().target = enemy;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-
+        if (col.tag == "EnemyBullet") graze++;
     }
+
 }

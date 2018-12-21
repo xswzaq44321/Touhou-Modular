@@ -5,14 +5,15 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public string item = "";
-	// Use this for initialization
-	void Start () {
+    public int max_HP, HP, item_num = 1;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(GetComponent<Health>().HP <= 0)
+        if(HP <= 0)
         {
             if (item != "")
             {

@@ -5,10 +5,9 @@ using UnityEngine;
 public class PowerUpItem : MonoBehaviour {
 
     public float init_speed;
-    private float start_time;
+    public int effect = 1;
 	// Use this for initialization
 	void Start () {
-        start_time = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -23,9 +22,9 @@ public class PowerUpItem : MonoBehaviour {
         if(col.gameObject.tag == "Player")
         {
             if (gameObject.tag == "Point")
-                col.GetComponent<PlayerController>().point++;
+                col.GetComponent<PlayerController>().point += effect;
             else if (gameObject.tag == "Power")
-                col.GetComponent<PlayerController>().power++;
+                col.GetComponent<PlayerController>().power += effect;
             Destroy(gameObject);
         }
     }
