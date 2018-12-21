@@ -6,9 +6,10 @@ public class PlayerController : MonoBehaviour {
 
     public float speed, shoot_delay_short, shoot_delay_long;
     public GameObject normal_bullet, trace_bullet, enemy;
+    private GameObject bullet;
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
-    private int power = 0, gonzo = 0;
+    private int power = 0, point = 0, gonzo = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -36,22 +37,66 @@ public class PlayerController : MonoBehaviour {
         if (delay_time_short >= shoot_delay_short && Input.GetKey(KeyCode.Z))
         {
             delay_time_short = 0;
-            GameObject bullet = Instantiate(normal_bullet);
-            bullet.GetComponent<Shoot>().direction = Vector3.up;
-            bullet.transform.position = transform.position;
+            if (power < 16)
+            {
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = Vector3.up;
+                bullet.transform.position = transform.position;
+            }
+            else if(power >= 16 && power < 32)
+            {
+                //left bullet//
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = new Vector3(-1, 19.43f, 0);
+                bullet.transform.position = transform.position + Vector3.left * 0.2f;
+
+                //right bullet//
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = new Vector3(1, 19.43f, 0);
+                bullet.transform.position = transform.position + Vector3.right * 0.2f;
+            }
+            else if (power >= 32)
+            {
+                //left bullet//
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = new Vector3(-1, 11.43f, 0);
+                bullet.transform.position = transform.position + Vector3.left * 0.37f;
+
+                //mid bullet//
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = Vector3.up;
+                bullet.transform.position = transform.position;
+
+                //right bullet//
+                bullet = Instantiate(normal_bullet);
+                bullet.GetComponent<Shoot>().direction = new Vector3(1, 11.43f, 0);
+                bullet.transform.position = transform.position + Vector3.right * 0.37f;
+            }
         }
 
-        //trace bullet//
+        //trace bullet, over power 8//   
         delay_time_long += Time.deltaTime;
-        if (delay_time_long >= shoot_delay_short && Input.GetKey(KeyCode.Z))
+        if (delay_time_long >= shoot_delay_long && Input.GetKey(KeyCode.Z) && power >= 8)
         {
             delay_time_long = 0;
-            GameObject bullet = Instantiate(trace_bullet);
-            bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
+
+            //left side//
+            bullet = Instantiate(trace_bullet);
+            bullet.transform.position = transform.GetChild(0).position;
+            bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1, 0);
             bullet.GetComponent<Trace>().target = enemy;
-            bullet.GetComponent<Trace>().range = 3;
-            bullet.transform.position = transform.position;
+            bullet.GetComponent<Trace>().range = 100;
+
+            //right side//
+            bullet = Instantiate(trace_bullet);
+            bullet.transform.position = transform.GetChild(1).position;
+            bullet.GetComponent<Shoot>().direction = new Vector3(1, 1, 0);
+            bullet.GetComponent<Trace>().target = enemy;
+            bullet.GetComponent<Trace>().range = 100;
         }
+
+        //health bar//
+
 
     }
 }
