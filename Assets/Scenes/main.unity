@@ -113,48 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &204465126
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -5.7881994
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -2.8008194
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291340440140900, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: eeaf2f58c21994d4aa87553e4c2c3a85, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &377253095
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +571,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -50
   m_Sprite: {fileID: 21300000, guid: 8dc23cf3801a8fc4daa032299370aee3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -635,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8e1c92ffbaf847be1a435f5d12c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 120
+  speed: 360
   expand: 0.6
 --- !u!1 &973321202
 GameObject:

@@ -6,12 +6,13 @@ public class Invinsible : MonoBehaviour {
 
     private float start_time, flash_time = 0, collider_radius;
     public float invinsible_time = 5;
+    private Vector2 reset;
 
 	// Use this for initialization
 	void Start () {
         start_time = Time.time;
-        Destroy(transform.GetChild(0).GetComponent<Rigidbody2D>());
-        transform.GetChild(0).GetComponent<CircleCollider2D>().isTrigger = false;
+        reset = transform.GetChild(0).GetComponent<CircleCollider2D>().offset;
+        transform.GetChild(0).GetComponent<CircleCollider2D>().offset = Vector2.one * -100;
     }
 
     // Update is called once per frame
@@ -28,9 +29,7 @@ public class Invinsible : MonoBehaviour {
         if (Time.time - start_time >= invinsible_time)
         {
             GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
-            transform.GetChild(0).gameObject.AddComponent<Rigidbody2D>();
-            transform.GetChild(0).GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            transform.GetChild(0).GetComponent<CircleCollider2D>().isTrigger = true;
+            transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().offset = reset;
             Destroy(this);
         }
 	}

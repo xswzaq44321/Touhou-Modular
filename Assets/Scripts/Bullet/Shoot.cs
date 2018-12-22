@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour {
 
     public Vector3 direction;
     public float speed;
-    public int atk;
+    public int atk = 1;
 	// Use this for initialization
 	void Start () {
 		

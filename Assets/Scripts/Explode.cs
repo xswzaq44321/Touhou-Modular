@@ -12,13 +12,11 @@ public class Explode : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Debug.Log(transform.GetComponent<SpriteRenderer>().color.a);
         if (transform.GetComponent<SpriteRenderer>().color.a > 0)
         {
             transform.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 3) * Time.deltaTime;
             transform.localScale += Vector3.one * 15 * Time.deltaTime;
         }
         else Destroy(gameObject);
-
     }
 }
