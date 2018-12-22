@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour {
     public int power = 15, point = 0, graze = 0, max_HP, HP;
 	// Use this for initialization
 	void Start () {
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,7 +36,7 @@ public class PlayerController : MonoBehaviour {
         else
             GetComponent<Animator>().SetFloat("speedX", 0);
         if (Input.GetKey(KeyCode.LeftShift))
-            transform.position += direction.normalized * speed * 0.7f * Time.deltaTime;
+            transform.position += direction.normalized * speed * 0.5f * Time.deltaTime;
         else
             transform.position += direction.normalized * speed * Time.deltaTime;
 
@@ -56,12 +55,12 @@ public class PlayerController : MonoBehaviour {
             {
                 //left bullet//
                 bullet = Instantiate(normal_bullet);
-                bullet.GetComponent<Shoot>().direction = new Vector3(-1, 19.43f, 0);
+                bullet.GetComponent<Shoot>().direction = new Vector3(-1, 70, 0);
                 bullet.transform.position = transform.position + Vector3.left * 0.2f;
 
                 //right bullet//
                 bullet = Instantiate(normal_bullet);
-                bullet.GetComponent<Shoot>().direction = new Vector3(1, 19.43f, 0);
+                bullet.GetComponent<Shoot>().direction = new Vector3(1, 70, 0);
                 bullet.transform.position = transform.position + Vector3.right * 0.2f;
             }
             else if (power >= 32)
@@ -91,13 +90,13 @@ public class PlayerController : MonoBehaviour {
 
             //left side//
             bullet = Instantiate(trace_bullet);
-            bullet.transform.position = transform.GetChild(0).position;
+            bullet.transform.position = transform.GetChild(1).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1.732f, 0);
             bullet.GetComponent<Trace>().target = enemy;
 
             //right side//
             bullet = Instantiate(trace_bullet);
-            bullet.transform.position = transform.GetChild(1).position;
+            bullet.transform.position = transform.GetChild(2).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
             bullet.GetComponent<Trace>().target = enemy;
         }
@@ -108,4 +107,13 @@ public class PlayerController : MonoBehaviour {
         if (col.tag == "EnemyBullet") graze++;
     }
 
+    public void addHP(int deltaHP)
+    {
+        HP += deltaHP;
+        if (HP > max_HP) HP = max_HP;
+        if (deltaHP < 0)
+        {
+            gameObject.AddComponent<Invinsible>().invinsible_time = 5;
+        }
+    }
 }

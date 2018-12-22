@@ -15,7 +15,6 @@ public class Trace : MonoBehaviour {
     void Update() {
         float min = range;
         Vector3 endPoint = Vector3.zero;
-        //Transform locked = null;
         for(int i = 0; i < target.transform.childCount; i++)
         {
             float dis = Vector2.Distance(target.transform.GetChild(i).transform.position, transform.position);

@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class Invinsible : MonoBehaviour {
 
-    private float start_time, flash_time = 0;
-    public float invinsible_time;
+    private float start_time, flash_time = 0, collider_radius;
+    public float invinsible_time = 5;
+
 	// Use this for initialization
 	void Start () {
         start_time = Time.time;
-        Destroy(GetComponent<Rigidbody2D>());
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Destroy(transform.GetChild(0).GetComponent<Rigidbody2D>());
+        transform.GetChild(0).GetComponent<CircleCollider2D>().isTrigger = false;
+    }
+
+    // Update is called once per frame
+    void Update () {
         flash_time += Time.deltaTime;
-        if (flash_time >= 0.5f && flash_time < 1) ;
-        //gameObject.SetActive(false);
-        else if (flash_time >= 1)
+        if (flash_time >= 0.075f && flash_time < 0.15f)
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
+        else if (flash_time >= 0.15f)
         {
             flash_time = 0;
-            //gameObject.SetActive(true);
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
         }
 
-        if(Time.time - start_time >= invinsible_time)
+        if (Time.time - start_time >= invinsible_time)
         {
-            gameObject.AddComponent<Rigidbody2D>();
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+            transform.GetChild(0).gameObject.AddComponent<Rigidbody2D>();
+            transform.GetChild(0).GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            transform.GetChild(0).GetComponent<CircleCollider2D>().isTrigger = true;
             Destroy(this);
         }
 	}

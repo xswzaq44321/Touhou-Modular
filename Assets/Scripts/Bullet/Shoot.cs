@@ -15,7 +15,6 @@ public class Shoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position += direction.normalized * speed * Time.deltaTime;
-        //Debug.Log(transform.position);
         /*only destroy the one that surpass the upper screen,
         haven't done the ones that surpass the other sides of the screen.*/
         if (transform.position.y > 10) Destroy(gameObject);
@@ -30,7 +29,7 @@ public class Shoot : MonoBehaviour {
         }
         else if(tag == "EnemyBullet" && col.tag == "HitPoint")
         {
-            col.transform.parent.GetComponent<PlayerController>().HP--;
+            col.transform.parent.GetComponent<PlayerController>().addHP(-1);
             Destroy(gameObject);
         }
     }
