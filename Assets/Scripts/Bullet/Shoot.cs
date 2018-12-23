@@ -34,4 +34,12 @@ public class Shoot : MonoBehaviour {
         }
     }
 
+    public void set_shoot(float _direction, float _speed = -1)
+    {
+        transform.Rotate(new Vector3(0, 0 ,_direction));
+        _direction *= Mathf.Deg2Rad;
+        direction = new Vector3(Mathf.Cos(_direction), Mathf.Sin(_direction));
+        if(_speed > 0) speed = _speed;
+    }
+
 }

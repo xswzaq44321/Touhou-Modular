@@ -5,7 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour {
 
     private Vector3 direction;
-    private float laser_time;
+    private float laser_time, angle = 0, angular_speed = 0;
     private bool preparing = true;
     private Vector2 reset;
 	// Use this for initialization
@@ -34,7 +34,13 @@ public class Laser : MonoBehaviour {
         }
         else
         {
-            laser_time -= Time.deltaTime;
+            if(angle > 0)
+            {
+                transform.Rotate(new Vector3(0, 0, angular_speed * Time.deltaTime));
+                angle -= Mathf.Abs(angular_speed) * Time.deltaTime;
+            }
+            else
+                laser_time -= Time.deltaTime;
             if (laser_time <= 0)
             {
                 if(transform.localScale.x > 0)
@@ -49,6 +55,12 @@ public class Laser : MonoBehaviour {
     {
         transform.Rotate(new Vector3(0, 0, direction));
         laser_time = time;
+    }
+
+    public void set_rotate(float _angle, float _angular_speed)
+    {
+        angle = _angle;
+        angular_speed = _angular_speed;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

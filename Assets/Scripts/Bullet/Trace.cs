@@ -25,7 +25,7 @@ public class Trace : MonoBehaviour {
                 endPoint = target.transform.GetChild(i).transform.position - transform.position;
             }
         }
-        if(locked)
+        if (locked)
             GetComponent<Shoot>().direction += endPoint * Time.deltaTime * 10;
     }
 

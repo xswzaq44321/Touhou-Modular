@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    public string item = "";
+    public string item = "", die;
     public int max_HP, HP, item_num = 1;
     private Vector3 direction, pivot;
     private float speed, distance, angle, angular_speed;
@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour {
                 GameObject powerup = Instantiate(Resources.Load("prefab/" + item) as GameObject);
                 powerup.transform.position = transform.position;
             }
-            GameObject explode = Instantiate(Resources.Load("prefab/explode_blue") as GameObject);
+            GameObject explode = Instantiate(Resources.Load("prefab/" + die) as GameObject);
             explode.transform.position = transform.position;
             Destroy(gameObject);
         }
@@ -44,6 +44,8 @@ public class EnemyController : MonoBehaviour {
         //turning
         if (turning)
         {
+            transform.RotateAround(pivot, Vector3.back, angular_speed * Time.deltaTime);
+            angle -= angular_speed * Time.deltaTime;
             if (angle <= 0) turning = false;
         }
             
@@ -66,5 +68,11 @@ public class EnemyController : MonoBehaviour {
         pivot = transform.position - new Vector3(Mathf.Cos(start_angle), Mathf.Sin(start_angle)) * radius;
         angle = end_angle;
         angular_speed = _angular_speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "HitPoint")
+            col.transform.parent.GetComponent<PlayerController>().addHP(-1);
     }
 }

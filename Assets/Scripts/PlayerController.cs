@@ -12,10 +12,11 @@ public class PlayerController : MonoBehaviour {
     public int power = 15, point = 0, graze = 0, max_HP, HP;
 	// Use this for initialization
 	void Start () {
+        gameObject.AddComponent<Invinsible>().invinsible_time = 5;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         //move//
         direction = Vector3.zero;
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour {
         if (HP > max_HP) HP = max_HP;
         if (deltaHP < 0)
         {
+            GetComponent<AudioSource>().Play();
             gameObject.AddComponent<Invinsible>().invinsible_time = 5;
         }
     }

@@ -8,6 +8,7 @@ public class PowerUpItem : MonoBehaviour {
     public int effect = 1;
 	// Use this for initialization
 	void Start () {
+        init_speed += Random.Range(-2, 2);
 	}
 	
 	// Update is called once per frame

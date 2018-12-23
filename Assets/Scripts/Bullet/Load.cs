@@ -6,8 +6,7 @@ public class Load : MonoBehaviour {
 
     public float initial_scale;
     private string bullet_type;
-    private float speed;
-    private Vector3 direction;
+    private float speed, direction;
 	// Use this for initialization
 	void Start () {
         transform.localScale = Vector3.one * initial_scale;
@@ -22,13 +21,12 @@ public class Load : MonoBehaviour {
         {
             GameObject bullet = Instantiate(Resources.Load("prefab/" + bullet_type) as GameObject);
             bullet.transform.position = transform.position;
-            bullet.GetComponent<Shoot>().speed = speed;
-            bullet.GetComponent<Shoot>().direction = direction;
+            bullet.GetComponent<Shoot>().set_shoot(direction, speed);
             Destroy(gameObject);
         }
     }
 
-    public void set_bullet(string _bullet_type, float _speed, Vector3 _direction)
+    public void set_bullet(string _bullet_type, float _speed, float _direction)
     {
         bullet_type = _bullet_type;
         speed = _speed;
