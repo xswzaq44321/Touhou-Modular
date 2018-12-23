@@ -39,13 +39,14 @@ public class EnemyController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
-            turn(3, 0, 90, 45);
+            turn(3, 90, 90, -45);
 
         //turning
         if (turning)
         {
-            transform.RotateAround(pivot, Vector3.back, angular_speed * Time.deltaTime);
-            angle -= angular_speed * Time.deltaTime;
+            transform.RotateAround(pivot, Vector3.forward, angular_speed * Time.deltaTime);
+            transform.Rotate(Vector3.back, angular_speed * Time.deltaTime);
+            angle -= Mathf.Abs(angular_speed) * Time.deltaTime;
             if (angle <= 0) turning = false;
         }
             
@@ -65,7 +66,7 @@ public class EnemyController : MonoBehaviour {
     {
         turning = true;
         start_angle = (start_angle + 180) * Mathf.Deg2Rad;
-        pivot = transform.position - new Vector3(Mathf.Cos(start_angle), Mathf.Sin(start_angle)) * radius;
+        pivot = transform.position + new Vector3(Mathf.Cos(start_angle), Mathf.Sin(start_angle)) * radius;
         angle = end_angle;
         angular_speed = _angular_speed;
     }
