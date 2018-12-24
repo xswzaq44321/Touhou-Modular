@@ -17,7 +17,7 @@ public class Shoot : MonoBehaviour {
         transform.position += direction.normalized * speed * Time.deltaTime;
         /*only destroy the one that surpass the upper screen,
         haven't done the ones that surpass the other sides of the screen.*/
-        if (transform.position.y > 10) Destroy(gameObject);
+        if (transform.position.y > 10 || transform.position.y < -20) Destroy(gameObject);
 	}
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -41,5 +41,10 @@ public class Shoot : MonoBehaviour {
         direction = new Vector3(Mathf.Cos(_direction), Mathf.Sin(_direction));
         if(_speed > 0) speed = _speed;
     }
+
+	void OnBecameInvisible()
+	{
+		Destroy(gameObject);
+	}
 
 }
