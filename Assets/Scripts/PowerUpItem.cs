@@ -13,7 +13,7 @@ public class PowerUpItem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        init_speed += (-9.8f - init_speed) * Time.deltaTime;
+        init_speed += (-9.8f - init_speed * 1.5f) * Time.deltaTime;
         transform.position += Vector3.up * init_speed * Time.deltaTime;
         if (transform.position.y > 100) Destroy(gameObject);//need to change after the UI is completed
 	}

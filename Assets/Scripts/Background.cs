@@ -8,7 +8,7 @@ public class Background : MonoBehaviour {
     public float speed, mist_speed;
 	// Use this for initialization
 	void Start () {
-        Debug.Log(transform.GetChild(1).GetComponent<Image>().sprite.rect.height);
+        //Debug.Log(transform.GetChild(1).GetComponent<Image>().sprite.rect.height);
         transform.GetChild(1).position = transform.GetChild(0).position + Vector3.up * 19.988f;
         transform.GetChild(3).position = transform.GetChild(2).position + Vector3.up * 19.988f;
     }
