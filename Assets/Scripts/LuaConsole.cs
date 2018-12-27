@@ -15,6 +15,7 @@ public class LuaConsole : MonoBehaviour
 	public GameObject chatPanel, textObject;
 	public Scrollbar verticleScrollBar;
 	public GameObject panel;
+	public GameObject boss;
 	Script script;
 	List<string> prevCommands;
 	int prevCommandsIter;
@@ -68,6 +69,8 @@ public class LuaConsole : MonoBehaviour
 
 	void setUpScriptFunc()
 	{
+		UserData.RegisterType<Character>();
+		script.Globals["boss"] = new Character(boss);
 		script.Globals["keyPress"] = (Func<int, bool>)((kcode) =>
 		{
 			if (panel.activeInHierarchy)
@@ -107,9 +110,6 @@ public class LuaConsole : MonoBehaviour
 		}
 		printMessage("ℒ Loading finish.");
 	}
-	/// <summary>
-	/// 
-	/// </summary>
 	/// <param name="path">path to Mod folder</param>
 	void loadMod(string path)
 	{

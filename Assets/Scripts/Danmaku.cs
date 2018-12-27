@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Danmaku : MonoBehaviour {
+    GameObject bullet;
+    private float a = 0;
+    private int way = 1;
+    private float delay;
 
     // Use this for initialization
-    GameObject bullet;
 	void Start () {
 		
 	}
 
-    private float a = 0;
-    private int way = 1;
-    private float delay;
 	// Update is called once per frame
 	void Update () {
         delay += Time.deltaTime;
@@ -96,14 +96,6 @@ public class Danmaku : MonoBehaviour {
                 laser("green_laser", transform.position + Vector3.left * 2 + Vector3.down * 6, 90 + 180 * i, 1, 180, -30);
             }
         }
-
-
-
-
-
-
-
-
     }
 
     /* 1. use as even number danmaku, cannot track
