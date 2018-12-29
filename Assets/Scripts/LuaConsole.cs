@@ -11,12 +11,12 @@ using UnityEngine.UI;
 
 public class LuaConsole : MonoBehaviour
 {
+	public Script script;
 	public InputField inputField;
 	public GameObject chatPanel, textObject;
 	public Scrollbar verticleScrollBar;
 	public GameObject panel;
 	public GameObject boss;
-	Script script;
 	List<string> prevCommands;
 	int prevCommandsIter;
 	List<string> helpMessageList = new List<string>();
