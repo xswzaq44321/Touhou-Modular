@@ -1,22 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoonSharp.Interpreter;
 
 public class EnemyController : MonoBehaviour {
 
     public string item = "", die;
     public int max_HP, HP, item_num = 1;
+	public Table luaGameObject;
+	public LuaConsole console;
     private Vector3 direction, pivot;
     private float speed, distance, angle, angular_speed;
     private bool moving = false, turning = false;
     // Use this for initialization
     void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
         //health
         if(HP <= 0)
         {
