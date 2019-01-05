@@ -1,3 +1,10 @@
+--[[
+    *** NOTICE ***
+    PLEASE DO NOT TOUCH THIS FILE!!! OR THE PROGRAM MIGHT NOT WORKING CORRECTLY.
+]]
+
+timer = {}
+
 local oldRequire = require
 require = function(module)
 	package.loaded[module] = nil

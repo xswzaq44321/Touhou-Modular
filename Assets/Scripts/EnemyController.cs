@@ -18,8 +18,6 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		console.script.Call(luaGameObject["Update"]);
-
         //health
         if(HP <= 0)
         {

@@ -40,17 +40,26 @@ public class LuaConsole : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.BackQuote))
+		{
+			panel.SetActive(!panel.activeInHierarchy);
+		}
 		handleCommand();
-		//(script.Globals["timer"] as Table)["deltaTime"] = DynValue.NewNumber(Time.deltaTime);
+		(script.Globals["timer"] as Table)["deltaTime"] = DynValue.NewNumber(Time.deltaTime);
+		(script.Globals["timer"] as Table)["time"] = DynValue.NewNumber(Time.time);
 		//foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
 		//{
 		//	if (obj.IsNil())
 		//		continue;
 		//	script.Call(obj.Table["upDate"]);
 		//}
-		if (Input.GetKeyDown(KeyCode.BackQuote))
+		try
 		{
-			panel.SetActive(!panel.activeInHierarchy);
+			script.Call((script.Globals["boss"] as Table)["upDate"]);
+		}
+		catch (InterpreterException luaExcept)
+		{
+			printMessage("LUA ERROR: " + luaExcept.Message, errColor);
 		}
 	}
 
@@ -65,12 +74,14 @@ public class LuaConsole : MonoBehaviour
 		script.Options.ScriptLoader = new ReplInterpreterScriptLoader();
 		setUpScriptConstant();
 		setUpScriptFunc();
+
+		UserData.RegisterType<Character>();
+		script.Globals["boss"] = makeTable(new Character(boss));
+		loadMod(Application.streamingAssetsPath + "/scripts/flandre");
 	}
 
 	void setUpScriptFunc()
 	{
-		UserData.RegisterType<Character>();
-		script.Globals["boss"] = new Character(boss);
 		script.Globals["keyPress"] = (Func<int, bool>)((kcode) =>
 		{
 			if (panel.activeInHierarchy)
@@ -79,6 +90,7 @@ public class LuaConsole : MonoBehaviour
 				return true;
 			return false;
 		});
+		doFile(Application.streamingAssetsPath + "/scripts/functions.lua");
 	}
 
 	void setUpScriptConstant()
@@ -156,6 +168,15 @@ public class LuaConsole : MonoBehaviour
 			newPath += "/" + subStrings[i];
 		}
 		return newPath;
+	}
+
+	Table makeTable(object obj)
+	{
+		var meta = new Table(script);
+		meta["__index"] = obj;
+		var tab = new Table(script);
+		tab.MetaTable = meta;
+		return tab;
 	}
 
 	void handleCommand()
