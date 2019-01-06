@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="../imgs/flandre_fly_4.png">
+	<title>東方模組化API</title>
+</head>
+
+<body>
+	<h1>東方模組化API</h1>
+	<h4>
+		以下API皆為從C#分享到lua中的函式
+	</h4>
+	<h2>一些預定好的function</h2>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<span class="function-name">timer.deltaTime()</span>
+					<p class="tab">回傳這一幀(this frame)距離上一幀的秒數</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">timer.time()</span>
+					<p class="tab">回傳遊戲開始到現在經過的秒數</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h2>Boss 的 function</h2>
+	<p>
+		在遊戲內console，你可以輸入"print(boss.help)"來顯示所有boss可用函式。<br>
+		也可以輸入"print(boss.explain.&lt;function-name&gt;)"來看詳細的解說。
+	</p>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<span class="function-name">boss.evenN_way(string load_type, string bullet_type, int even_N, float interval, float
+						speed, float degree = -90, float initial_radius = 0, float direction = 0)</span>
+					<p class="tab">1. use as even number danmaku, cannot track<br>
+						2. use as single bullet, ex: evenN_way("load_type", "bullet_type", 1, 0, speed, degree);<br>
+						3. use as circle, ex: evenN_way("load_type", "bullet_type", evenN, 360 / evenN, speed, 0, 3, angle);<br>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.oddN_way(string load_type, string bullet_type, int odd_N, float interval, float speed,
+						float initial_radius = 0)</span>
+					<p class="tab">odd number danmaku, automaticly track</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.radiate(string load_type, string bullet_type, int N, float speed, float degree = -90,
+						float initial_radius = 0)</span>
+					<p class="tab">radiate danmaku</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.shoot(string load_type, string bullet_type, float posx, float posy, float speed, float
+						degree)</span>
+					<p class="tab"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.laser(string laser_type, float str_pointx, float str_pointy, float str_pointz, float
+						str_angle, float time, float angle = 0, float angular_speed = 0)</span>
+					<p class="tab"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.move_straight(float angle, float _distance, float _speed)</span>
+					<p class="tab">move to specific distance</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.turn(float radius, float start_angle, float end_angle, float _angular_speed)</span>
+					<p class="tab"></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

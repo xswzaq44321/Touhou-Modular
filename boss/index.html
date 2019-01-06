@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8" />
 	<title>lua控制boss</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-	<link rel="icon" href="/imgs/flandre_fly_4.png">
+	<link href="../themes/prism.css" rel="stylesheet" />
+	<link rel="icon" href="../imgs/flandre_fly_4.png">
 </head>
+
 <body>
 	<h1>如何使用lua控制boss</h1>
 	<p>
-		
+		在StreamingAssets/scripts/flandre資料夾底下有個檔案叫做control.lua，該檔案就是控制boss行為的檔案。<br>
+		而其中有個很重要的函式是<span class="function-name">boss.upDate()</span>，這個函式在每幀執行時都會呼叫一次。<br>
+		範例如下:<br>
+		<pre><code class="language-lua line-numbers">local count = 0
+local a = 0
+
+local radiate
+
+function boss.upDate()
+	radiate()
+end
+
+function radiate()
+	count = count + timer.deltaTime
+	if(count > 3)then
+		if(count > 3.5)then
+			count = 0
+			a = 0
+		end
+		a = a + 0.5
+		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, a * 11, 2 - a * 0.01)
+		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, -a * 11, 2 - a * 0.01)
+
+		if(a < 50)then
+			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, a * 11 + 180, 1.5 - a * 0.02);
+			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, -a * 11 + 180, 1.5 - a * 0.02);
+		end
+	end
+end</code></pre>
+		第1,2行宣告出區域變數count, a用做計數功能，然後第4行預先宣告一個函式radiate，在upDate中每幀都呼叫。<br>
+		第10行定義radiate函式的內容，令boss等待3秒，然後每幀"輻射"出一對子彈，直到第3.5秒，然後再重新計數。
 	</p>
+	<script src="../prism.js"></script>
 </body>
+
 </html>
