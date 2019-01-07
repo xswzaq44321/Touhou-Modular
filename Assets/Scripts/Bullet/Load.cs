@@ -7,6 +7,8 @@ public class Load : MonoBehaviour {
     public float initial_scale;
     private string bullet_type;
     private float speed, direction;
+    public bool pause = false;
+
 	// Use this for initialization
 	void Start () {
         transform.localScale = Vector3.one * initial_scale;
@@ -15,6 +17,14 @@ public class Load : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause = pause ? false : true;
+        }
+        if (pause) return;
+
+        //load//
         transform.localScale -= Vector3.one * (initial_scale - 2) * 7 * Time.deltaTime;
         GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 8) * Time.deltaTime;
         if (transform.localScale.x <= 2)

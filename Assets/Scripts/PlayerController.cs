@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 direction;
     private float delay_time_short, delay_time_long;
     public int power = 15, point = 0, graze = 0, max_HP, HP, score, bomb = 0;
+    public bool pause = false;
 	// Use this for initialization
 	void Start () {
         gameObject.AddComponent<Invinsible>().invinsible_time = 5;
@@ -17,6 +18,21 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pause)
+            {
+                pause = false;
+                GetComponent<Animator>().speed = 1;
+            }
+            else
+            {
+                pause = true;
+                GetComponent<Animator>().speed = 0;
+            }
+        }
+        if (pause) return;
 
         //move//
         direction = Vector3.zero;

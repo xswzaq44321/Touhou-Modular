@@ -7,6 +7,8 @@ public class Maware : MonoBehaviour {
     public float speed;
     public float expand;
     private float init_size;
+    public bool pause = false;
+
 	// Use this for initialization
 	void Start () {
         init_size = transform.localScale.x;
@@ -14,6 +16,14 @@ public class Maware : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause = pause ? false : true;
+        }
+        if (pause) return;
+
+        //mare mare mare mare mare mare mare mare maware//
         transform.Rotate(Vector3.back * speed * Time.deltaTime);
         if ((Mathf.Abs(transform.localScale.x - init_size) >= 0.3f))
             expand *= -1;

@@ -12,14 +12,31 @@ public class EnemyController : MonoBehaviour {
     private Vector3 direction, pivot;
     private float speed, distance, angle, angular_speed;
     private bool moving = false, turning = false;
+    public bool pause = false;
     // Use this for initialization
     void Start () {
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //health
-        if(HP <= 0)
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pause)
+            {
+                pause = false;
+                GetComponent<Animator>().speed = 1;
+            }
+            else
+            {
+                pause = true;
+                GetComponent<Animator>().speed = 0;
+            }
+        }
+        if (pause)  return;
+
+        //health//
+        if (HP <= 0)
         {
             if (item != "")
             {
