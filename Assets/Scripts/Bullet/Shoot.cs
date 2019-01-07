@@ -41,7 +41,7 @@ public class Shoot : MonoBehaviour {
             col.transform.parent.GetComponent<PlayerController>().addHP(-1);
             Destroy(gameObject);
         }
-        else if (tag == "EnemyBullet" && col.name == "die(Clone)")
+        else if (tag == "EnemyBullet" && (col.name == "die(Clone)" || col.name == "bomb(Clone)"))
             Destroy(gameObject);
     }
 

@@ -6675,8 +6675,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: power
   die: explode_orange
-  max_HP: 1000
-  HP: 100
+  max_HP: 100000
+  HP: 10000
   item_num: 30
   console: {fileID: 0}
   pause: 0

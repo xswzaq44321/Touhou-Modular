@@ -100,5 +100,7 @@ public class EnemyController : MonoBehaviour {
     {
         if (col.tag == "HitPoint")
             col.transform.parent.GetComponent<PlayerController>().addHP(-1);
+        if (col.name == "bomb(Clone)")
+            HP -= 600;
     }
 }

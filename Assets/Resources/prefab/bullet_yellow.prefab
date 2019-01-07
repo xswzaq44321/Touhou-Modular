@@ -103,6 +103,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   speed: 20
   atk: 1
+  pause: 0
 --- !u!114 &114162924591020246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 480
   expand: 0
+  pause: 0
 --- !u!212 &212228970174601794
 SpriteRenderer:
   m_ObjectHideFlags: 1

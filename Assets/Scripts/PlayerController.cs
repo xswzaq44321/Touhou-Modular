@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject normal_bullet, trace_bullet, enemy;
     private GameObject bullet;
     private Vector3 direction;
-    private float delay_time_short, delay_time_long;
-    public int power = 15, point = 0, graze = 0, max_HP, HP, score, bomb = 0;
+    private float delay_time_short = 0, delay_time_long = 0, delay_bomb_time = 0;
+    public int power = 15, point = 0, graze = 0, max_HP, HP, score, bomb = 3;
+    private int bomb_count = 0;
     public bool pause = false;
 	// Use this for initialization
 	void Start () {
@@ -57,6 +58,16 @@ public class PlayerController : MonoBehaviour {
         else
             transform.position += direction.normalized * speed * Time.deltaTime;
 
+        //out of game//
+        if (transform.position.x > 2.086536f)
+            transform.position = new Vector2(2.086536f, transform.position.y);
+        if (transform.position.x < -7.032539f)
+            transform.position = new Vector2(-7.032539f, transform.position.y);
+        if (transform.position.y < -5.189061f)
+            transform.position = new Vector2(transform.position.x, -5.189061f);
+        if (transform.position.y > 5.241774f)
+            transform.position = new Vector2(transform.position.x, 5.241774f);
+
         //normal bullet//
         delay_time_short += Time.deltaTime;
         if (delay_time_short >= shoot_delay_short && Input.GetKey(KeyCode.Z))
@@ -66,6 +77,7 @@ public class PlayerController : MonoBehaviour {
             {
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = Vector3.up;
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position;
             }
             else if(power >= 16 && power < 32)
@@ -73,11 +85,13 @@ public class PlayerController : MonoBehaviour {
                 //left bullet//
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = new Vector3(-1, 70, 0);
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position + Vector3.left * 0.2f;
 
                 //right bullet//
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = new Vector3(1, 70, 0);
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position + Vector3.right * 0.2f;
             }
             else if (power >= 32)
@@ -85,16 +99,19 @@ public class PlayerController : MonoBehaviour {
                 //left bullet//
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = new Vector3(-1, 11.43f, 0);
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position + Vector3.left * 0.37f;
 
                 //mid bullet//
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = Vector3.up;
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position;
 
                 //right bullet//
                 bullet = Instantiate(normal_bullet);
                 bullet.GetComponent<Shoot>().direction = new Vector3(1, 11.43f, 0);
+                bullet.GetComponent<Shoot>().atk = power;
                 bullet.transform.position = transform.position + Vector3.right * 0.37f;
             }
         }
@@ -109,14 +126,33 @@ public class PlayerController : MonoBehaviour {
             bullet = Instantiate(trace_bullet);
             bullet.transform.position = transform.GetChild(1).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(-1, 1.732f, 0);
+            bullet.GetComponent<Shoot>().atk = power;
             bullet.GetComponent<Trace>().target = enemy;
 
             //right side//
             bullet = Instantiate(trace_bullet);
             bullet.transform.position = transform.GetChild(2).position;
             bullet.GetComponent<Shoot>().direction = new Vector3(1, 1.732f, 0);
+            bullet.GetComponent<Shoot>().atk = power;
             bullet.GetComponent<Trace>().target = enemy;
         }
+
+        //bomb//
+        if (Input.GetKeyDown(KeyCode.X) && bomb > 0)
+        {
+            bomb--;
+            bomb_count = 30;
+        }
+        delay_bomb_time += Time.deltaTime;
+        if (bomb_count > 0 && delay_bomb_time > 0.05f)
+        {
+            delay_bomb_time = 0;
+            bomb_count--;
+            GameObject explode = Instantiate(Resources.Load("prefab/bomb") as GameObject);
+            explode.transform.position = new Vector2(Random.Range(-7f, 2f), Random.Range(-5f, 5f));
+            explode.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)

@@ -16,19 +16,6 @@ public class Pause : MonoBehaviour {
             transform.GetChild(i).GetComponent<Image>().color = new Color(255, 255, 255, 0);
         for (int i = 1; i < transform.childCount; i++)
             transform.GetChild(i).GetComponent<RectTransform>().localScale = new Vector3(2.25f, 0, 0);
-
-        /*
-        foreach (string tag in UnityEditorInternal.InternalEditorUtility.tags)
-        {
-            if (tag == "Control") continue;
-            GameObject[] all = GameObject.FindGameObjectsWithTag(tag);
-            foreach (GameObject item in all)
-            {
-                //item.SetActive(false);
-                stopAllChild(item);
-            }
-        
-        }*/
     }
 
     // Update is called once per frame
