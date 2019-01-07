@@ -51,6 +51,10 @@ public class LuaConsole : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.BackQuote))
 		{
 			panel.SetActive(!panel.activeInHierarchy);
+			if (panel.activeInHierarchy)
+				inputField.ActivateInputField();
+			else
+				inputField.text = "";
 		}
 		handleCommand();
 		(script.Globals["timer"] as Table)["deltaTime"] = DynValue.NewNumber(Time.deltaTime);
