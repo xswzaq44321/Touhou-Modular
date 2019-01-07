@@ -130,6 +130,8 @@ public class PlayerController : MonoBehaviour {
         if (HP > max_HP) HP = max_HP;
         if (deltaHP < 0)
         {
+            GameObject explode = Instantiate(Resources.Load("prefab/die") as GameObject);
+            explode.transform.position = transform.position;
             GetComponent<AudioSource>().Play();
             gameObject.AddComponent<Invinsible>().invinsible_time = 5;
         }
