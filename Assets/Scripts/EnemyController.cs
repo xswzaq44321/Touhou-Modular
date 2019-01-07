@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MoonSharp.Interpreter;
-using System;
 
 public class EnemyController : MonoBehaviour {
 
@@ -14,7 +13,7 @@ public class EnemyController : MonoBehaviour {
     private float speed, distance, angle, angular_speed;
     private bool moving = false, turning = false;
     public bool pause = false;
-	public event EventHandler death;
+	public event System.EventHandler death;
 	// Use this for initialization
 	void Start () {
 	}

@@ -149,6 +149,7 @@ public class Character
 		this.body.GetComponent<EnemyController>().death += (s, e) =>
 		{
 			this.body = null;
+			death = true;
 		};
 	}
 

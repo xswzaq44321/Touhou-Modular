@@ -80,6 +80,10 @@ public class LuaConsole : MonoBehaviour
 				{
 					printMessage("LUA ERROR: " + luaExcept.Message, errColor);
 				}
+				catch (Exception except)
+				{
+					printMessage("ERROR: " + except.Message, errColor);
+				}
 			}
 			foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
 			{
@@ -92,6 +96,10 @@ public class LuaConsole : MonoBehaviour
 				catch (InterpreterException luaExcept)
 				{
 					printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+				}
+				catch (Exception except)
+				{
+					printMessage("ERROR: " + except.Message, errColor);
 				}
 			}
 		}
@@ -110,17 +118,20 @@ public class LuaConsole : MonoBehaviour
 		setUpScriptConstant();
 		setUpScriptFunc();
 
+		loadMod(Application.streamingAssetsPath + "/scripts/flandre");
+		loadMod(Application.streamingAssetsPath + "/scripts/minion");
+
 		UserData.RegisterType<Character>();
-		script.Globals["boss"] = makeTable(new Character(boss));
-		script.DoString("gameObjects.boss = boss");
+		script.Globals.Get("boss").Table["obj"] = new Character(boss);
+		script.DoString("setmetatable(boss, {__index = boss.obj})");
+		script.DoString("table.insert(gameObjects, boss)");
 
 		foreach (var minion in minions)
 		{
-			script.Globals["temp"] = makeTable(new Character(minion));
-			script.DoString("table.insert(minions, temp)");
+			script.Globals.Get("minion").Table["obj"] = new Character(minion);
+			script.DoString("table.insert(minions, minion)");
 		}
 
-		loadMod(Application.streamingAssetsPath + "/scripts/flandre");
 	}
 
 	void setUpScriptFunc()
@@ -211,15 +222,6 @@ public class LuaConsole : MonoBehaviour
 			newPath += "/" + subStrings[i];
 		}
 		return newPath;
-	}
-
-	Table makeTable(object obj)
-	{
-		var meta = new Table(script);
-		meta["__index"] = obj;
-		var tab = new Table(script);
-		tab.MetaTable = meta;
-		return tab;
 	}
 
 	void handleCommand()
