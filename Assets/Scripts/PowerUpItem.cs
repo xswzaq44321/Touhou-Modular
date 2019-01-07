@@ -10,7 +10,7 @@ public class PowerUpItem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        init_speed += Random.Range(-2, 2);
+        init_speed += Random.Range(-2f, 2f);
 	}
 	
 	// Update is called once per frame

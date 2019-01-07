@@ -36,11 +36,13 @@ public class Shoot : MonoBehaviour {
             col.gameObject.GetComponent<EnemyController>().HP -= atk;
             Destroy(gameObject);
         }
-        else if(tag == "EnemyBullet" && col.tag == "HitPoint")
+        else if (tag == "EnemyBullet" && col.tag == "HitPoint")
         {
             col.transform.parent.GetComponent<PlayerController>().addHP(-1);
             Destroy(gameObject);
         }
+        else if (tag == "EnemyBullet" && col.name == "die(Clone)")
+            Destroy(gameObject);
     }
 
     public void set_shoot(float _direction, float _speed = -1)

@@ -43,8 +43,13 @@ public class EnemyController : MonoBehaviour {
 			death.Invoke(this, null);
             if (item != "")
             {
-                GameObject powerup = Instantiate(Resources.Load("prefab/" + item) as GameObject);
-                powerup.transform.position = transform.position;
+                for(int i = 0; i < item_num; i++)
+                {
+                    GameObject powerup = Instantiate(Resources.Load("prefab/" + item) as GameObject);
+                    powerup.transform.position = transform.position;
+                    if (i > 0)
+                        powerup.transform.position += Vector3.right * Random.Range(-2f, 2f);
+                }
             }
             GameObject explode = Instantiate(Resources.Load("prefab/" + die) as GameObject);
             explode.transform.position = transform.position;
