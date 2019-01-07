@@ -1060,6 +1060,10 @@ Prefab:
       propertyPath: m_Name
       value: red_fairy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1421877819749104, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
   m_IsPrefabParent: 0
@@ -2262,6 +2266,7 @@ MonoBehaviour:
   verticleScrollBar: {fileID: 1384454136}
   panel: {fileID: 585095593}
   boss: {fileID: 2002526181}
+  minions: []
 --- !u!114 &574155170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5535,6 +5540,10 @@ Prefab:
     - target: {fileID: 4448934921881178, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421877819749104, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}

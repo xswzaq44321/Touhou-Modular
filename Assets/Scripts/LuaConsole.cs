@@ -17,6 +17,7 @@ public class LuaConsole : MonoBehaviour
 	public Scrollbar verticleScrollBar;
 	public GameObject panel;
 	public GameObject boss;
+	public List<GameObject> minions;
 	List<string> prevCommands;
 	int prevCommandsIter;
 	List<string> helpMessageList = new List<string>();
@@ -27,6 +28,12 @@ public class LuaConsole : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		var mins = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach (var minion in mins)
+		{
+			if (minion.name != "flandre")
+				minions.Add(minion);
+		}
 		setUpScript();
 		// invoke all object's start function
 		//foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
@@ -48,12 +55,6 @@ public class LuaConsole : MonoBehaviour
 		handleCommand();
 		(script.Globals["timer"] as Table)["deltaTime"] = DynValue.NewNumber(Time.deltaTime);
 		(script.Globals["timer"] as Table)["time"] = DynValue.NewNumber(Time.time);
-		//foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
-		//{
-		//	if (obj.IsNil())
-		//		continue;
-		//	script.Call(obj.Table["upDate"]);
-		//}
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			if (pause)
@@ -67,13 +68,31 @@ public class LuaConsole : MonoBehaviour
 		}
 		if (!pause)
 		{
-			try
+			foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
 			{
-				script.Call((script.Globals["boss"] as Table)["upDate"]);
+				if (obj.IsNil())
+					continue;
+				try
+				{
+					script.Call(obj.Table["baseUpDate"]);
+				}
+				catch (InterpreterException luaExcept)
+				{
+					printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+				}
 			}
-			catch (InterpreterException luaExcept)
+			foreach (var obj in (script.Globals["gameObjects"] as Table).Values)
 			{
-				printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+				if (obj.IsNil())
+					continue;
+				try
+				{
+					script.Call(obj.Table["upDate"]);
+				}
+				catch (InterpreterException luaExcept)
+				{
+					printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+				}
 			}
 		}
 	}
@@ -86,12 +105,21 @@ public class LuaConsole : MonoBehaviour
 		script = new Script();
 		script.Options.DebugPrint = s => printMessage(s);
 		script.Globals["gameObjects"] = DynValue.NewTable(script);
+		script.Globals["minions"] = DynValue.NewTable(script);
 		script.Options.ScriptLoader = new ReplInterpreterScriptLoader();
 		setUpScriptConstant();
 		setUpScriptFunc();
 
 		UserData.RegisterType<Character>();
 		script.Globals["boss"] = makeTable(new Character(boss));
+		script.DoString("gameObjects.boss = boss");
+
+		foreach (var minion in minions)
+		{
+			script.Globals["temp"] = makeTable(new Character(minion));
+			script.DoString("table.insert(minions, temp)");
+		}
+
 		loadMod(Application.streamingAssetsPath + "/scripts/flandre");
 	}
 
