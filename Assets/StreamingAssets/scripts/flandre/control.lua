@@ -1,10 +1,10 @@
+local radiate, laser, radiate2, laser2, shoot, moveRight, moveLeft, laser3
+
 boss = {
 	delay = 0,
 	a = 0,
 	way = 1,
 	obj,
-	-- local radiate, laser, radiate2, laser2, shoot, moveRight, moveLeft, laser3
-
 	baseUpDate = function()
 		boss.delay = boss.delay + timer.deltaTime
 		if (boss.death) then
@@ -15,10 +15,11 @@ boss = {
 	end,
 	upDate = function()
 		radiate()
+		-- laser()
 	end
 }
 
-function radiate()
+radiate = function()
 	if (boss.delay > 3) then
 		if (boss.delay > 3.5) then
 			boss.delay = 0
@@ -47,7 +48,7 @@ function radiate()
 	end
 end
 
-function laser()
+laser = function()
 	if (boss.delay >= 0.2) then
 		local x, y, z = boss.my_position()
 		boss.laser("red_laser", x, y, z, boss.player_direction() + math.random(-15, 15), 1)
@@ -55,7 +56,7 @@ function laser()
 	end
 end
 
-function radiate2()
+radiate2 = function()
 	if (boss.delay >= 0.015) then
 		boss.a = boss.a + 1
 		local b = boss.a
@@ -67,7 +68,7 @@ function radiate2()
 	end
 end
 
-function laser2()
+laser2 = function()
 	local x, y, z = boss.my_position()
 	boss.way = boss.way + 180
 	boss.move_straight(boss.way, 5, 2)
@@ -75,7 +76,7 @@ function laser2()
 	boss.laser("blue_laser", x, y, z, 240, 3, 315, -300)
 end
 
-function shoot()
+shoot = function()
 	local col = {"red", "yellow", "blue", "green", "pink", "white"}
 	local ccc = math.random(0, 6) + 1
 	if (boss.delay >= 0.5) then
@@ -86,15 +87,15 @@ function shoot()
 	end
 end
 
-function moveRight()
+moveRight = function()
 	boss.move_straight(0, 1, 3)
 end
 
-function moveLeft()
+moveLeft = function()
 	boss.move_straight(180, 1, 3)
 end
 
-function laser3()
+laser3 = function()
 	for i = 0, 2 do
 		local x, y, z = boss.my_position()
 		boss.laser("green_laser", x + 1 * 2, y - 1 * 3, z, 0 + 180 * i, 1, 180, -30)

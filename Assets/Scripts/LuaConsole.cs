@@ -74,7 +74,7 @@ public class LuaConsole : MonoBehaviour
 					continue;
 				try
 				{
-					script.Call(obj.Table["baseUpDate"]);
+					script.Call(obj.Table["baseUpDate"], obj);
 				}
 				catch (InterpreterException luaExcept)
 				{
@@ -91,7 +91,7 @@ public class LuaConsole : MonoBehaviour
 					continue;
 				try
 				{
-					script.Call(obj.Table["upDate"]);
+					script.Call(obj.Table["upDate"], obj);
 				}
 				catch (InterpreterException luaExcept)
 				{
@@ -128,10 +128,14 @@ public class LuaConsole : MonoBehaviour
 
 		foreach (var minion in minions)
 		{
-			script.Globals.Get("minion").Table["obj"] = new Character(minion);
-			script.DoString("table.insert(minions, minion)");
+			script.DoString("temp = deepcopy(minion)");
+			script.Globals.Get("temp").Table["obj"] = new Character(minion);
+			script.DoString("setmetatable(temp, {__index = temp.obj})");
+			script.DoString("table.insert(minions, temp)");
+			script.DoString("table.insert(gameObjects, temp)");
 		}
 
+		doFile(Application.streamingAssetsPath + "/scripts/minion/postControl.lua");
 	}
 
 	void setUpScriptFunc()
@@ -161,7 +165,7 @@ public class LuaConsole : MonoBehaviour
 	/// <param name="path">path to lua file</param>
 	void doFile(string path)
 	{
-		printMessage("ℒ Loading " + path);
+		printMessage("ℒ Doing " + path);
 		try
 		{
 			script.DoFile(path);
@@ -239,7 +243,7 @@ public class LuaConsole : MonoBehaviour
 				while (messageList.Count > 0)
 				{
 					Destroy(messageList[0].textObject.gameObject);
-					messageList.Remove(messageList[0]);
+					messageList.RemoveAt(0);
 				}
 			}
 			else if (inputField.text == "help")
@@ -286,6 +290,11 @@ public class LuaConsole : MonoBehaviour
 	/// <param name="msg">message to print</param>
 	void printMessage(string msg)
 	{
+		if (messageList.Count >= 100)
+		{
+			Destroy(messageList[0].textObject.gameObject);
+			messageList.RemoveAt(0);
+		}
 		Message newMessage = new Message(msg);
 		GameObject newText = Instantiate(textObject, chatPanel.transform);
 		newMessage.textObject = newText.GetComponent<Text>();
@@ -300,6 +309,11 @@ public class LuaConsole : MonoBehaviour
 	/// <param name="color">color of message</param>
 	void printMessage(string msg, Color color)
 	{
+		if (messageList.Count >= 100)
+		{
+			Destroy(messageList[0].textObject.gameObject);
+			messageList.RemoveAt(0);
+		}
 		Message newMessage = new Message(msg);
 		GameObject newText = Instantiate(textObject, chatPanel.transform);
 		newMessage.textObject = newText.GetComponent<Text>();
