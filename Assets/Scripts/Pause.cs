@@ -67,6 +67,7 @@ public class Pause : MonoBehaviour {
             }
         }
 
+        if (!pause) return;
         //select//
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -79,8 +80,6 @@ public class Pause : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Z) && state == 0)
         {
             pause = false;
-            for (int i = 0; i < transform.childCount; i++)
-                transform.GetChild(i).GetComponent<Image>().color = new Color(1, 1, 1, 0);
         }
 
 
