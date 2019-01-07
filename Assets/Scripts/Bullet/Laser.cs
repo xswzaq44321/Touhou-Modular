@@ -8,6 +8,8 @@ public class Laser : MonoBehaviour {
     private float laser_time, angle = 0, angular_speed = 0;
     private bool preparing = true;
     private Vector2 reset;
+    public bool pause = false;
+
 	// Use this for initialization
 	void Start () {
         transform.localScale = new Vector3(0, 0.1f, 1);
@@ -18,6 +20,14 @@ public class Laser : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause = pause ? false : true;
+        }
+        if (pause) return;
+
+        //laser//
         if (preparing)
         {
             if (transform.localScale.x < 3)

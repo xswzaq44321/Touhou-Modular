@@ -7,6 +7,8 @@ public class Shoot : MonoBehaviour {
     public Vector3 direction;
     public float speed;
     public int atk = 1;
+    public bool pause = false;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,6 +16,13 @@ public class Shoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //pause//
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause = pause ? false : true;
+        }
+        if (pause) return;
+
         transform.position += direction.normalized * speed * Time.deltaTime;
         /*only destroy the one that surpass the upper screen,
         haven't done the ones that surpass the other sides of the screen.*/
