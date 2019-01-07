@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     public int power = 15, point = 0, graze = 0, max_HP, HP, score, bomb = 3;
     private int bomb_count = 0;
     public bool pause = false;
+    public Canvas gameover, Pause;
 	// Use this for initialization
 	void Start () {
         gameObject.AddComponent<Invinsible>().invinsible_time = 5;
@@ -176,6 +177,12 @@ public class PlayerController : MonoBehaviour {
             explode.transform.position = transform.position;
             GetComponent<AudioSource>().Play();
             gameObject.AddComponent<Invinsible>().invinsible_time = 5;
+        }
+        if (HP < 0)
+        {
+            gameover.gameObject.AddComponent<GameOver>();
+            Pause.GetComponent<Pause>().enabled = false;
+            Destroy(gameObject);
         }
     }
 }
