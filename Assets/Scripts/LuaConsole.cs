@@ -22,6 +22,7 @@ public class LuaConsole : MonoBehaviour
 	List<string> helpMessageList = new List<string>();
 	List<Message> messageList = new List<Message>();
 	Color errColor = new Color(255 / 255f, 20 / 255f, 147 / 255f);
+	bool pause = false;
 
 	// Use this for initialization
 	void Start()
@@ -53,13 +54,27 @@ public class LuaConsole : MonoBehaviour
 		//		continue;
 		//	script.Call(obj.Table["upDate"]);
 		//}
-		try
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			script.Call((script.Globals["boss"] as Table)["upDate"]);
+			if (pause)
+			{
+				pause = false;
+			}
+			else
+			{
+				pause = true;
+			}
 		}
-		catch (InterpreterException luaExcept)
+		if (!pause)
 		{
-			printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+			try
+			{
+				script.Call((script.Globals["boss"] as Table)["upDate"]);
+			}
+			catch (InterpreterException luaExcept)
+			{
+				printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+			}
 		}
 	}
 
