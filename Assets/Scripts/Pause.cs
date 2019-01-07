@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour {
 
@@ -77,9 +78,17 @@ public class Pause : MonoBehaviour {
             transform.GetChild(state + 2).GetComponent<Image>().color = new Color(255, 113f / 255f, 113f / 255f, 255);
             transform.GetChild(state + 2).GetComponent<RectTransform>().localScale *= 1.1f;
         }
-        if(Input.GetKeyDown(KeyCode.Z) && state == 0)
+        if(Input.GetKeyDown(KeyCode.Z))
         {
-            pause = false;
+            switch (state)
+            {
+                case 0:
+                    pause = false;
+                    break;
+                case 1:
+                    SceneManager.LoadScene(0);
+                    break;
+            }
         }
 
 
