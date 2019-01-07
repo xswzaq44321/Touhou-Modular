@@ -6622,11 +6622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cbf264a777d28459c292a360d42df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: power_big
+  item: power
   die: explode_orange
   max_HP: 1000
   HP: 100
-  item_num: 1
+  item_num: 30
   console: {fileID: 0}
   pause: 0
 --- !u!61 &2002526184
