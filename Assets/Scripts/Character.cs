@@ -8,6 +8,8 @@ using MoonSharp.Interpreter;
 public class Character
 {
 	public GameObject body;
+	public bool death = false;
+
 	// explain each function's functionality
 	public Dictionary<string, string> explain = new Dictionary<string, string>
 	{
@@ -143,6 +145,11 @@ public class Character
 	public Character(GameObject body)
 	{
 		this.body = body;
+
+		this.body.GetComponent<EnemyController>().death += (s, e) =>
+		{
+			this.body = null;
+		};
 	}
 
 	public void evenN_way(string load_type, string bullet_type, int even_N, float interval, float speed, float degree = -90, float initial_radius = 0, float direction = 0)

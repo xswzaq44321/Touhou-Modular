@@ -4,9 +4,17 @@ local way = 1
 
 -- local radiate, laser, radiate2, laser2, shoot, moveRight, moveLeft, laser3
 
-function boss.upDate()
+function boss.baseUpDate()
 	delay = delay + timer.deltaTime
-	-- radiate();
+	if(boss.death)then
+		boss.upDate = function ()
+			-- nothing
+		end
+	end
+end
+
+function boss.upDate()
+	radiate();
 end
 
 function radiate()

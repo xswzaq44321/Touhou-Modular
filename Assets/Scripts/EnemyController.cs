@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MoonSharp.Interpreter;
+using System;
 
 public class EnemyController : MonoBehaviour {
 
@@ -13,8 +14,9 @@ public class EnemyController : MonoBehaviour {
     private float speed, distance, angle, angular_speed;
     private bool moving = false, turning = false;
     public bool pause = false;
-    // Use this for initialization
-    void Start () {
+	public event EventHandler death;
+	// Use this for initialization
+	void Start () {
 	}
 	
 	// Update is called once per frame
@@ -38,6 +40,7 @@ public class EnemyController : MonoBehaviour {
         //health//
         if (HP <= 0)
         {
+			death.Invoke(this, null);
             if (item != "")
             {
                 for(int i = 0; i < item_num; i++)

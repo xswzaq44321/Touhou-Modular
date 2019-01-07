@@ -12,6 +12,7 @@ TagManager:
   - EnemyBullet
   - Tracker
   - Control
+  - Minion
   layers:
   - Default
   - TransparentFX
