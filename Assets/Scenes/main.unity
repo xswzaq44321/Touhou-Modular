@@ -4609,9 +4609,11 @@ GameObject:
   - component: {fileID: 1083865204}
   - component: {fileID: 1083865206}
   - component: {fileID: 1083865205}
+  - component: {fileID: 1083865208}
+  - component: {fileID: 1083865207}
   m_Layer: 5
   m_Name: frame_right
-  m_TagString: Untagged
+  m_TagString: Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4667,6 +4669,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1083865203}
+--- !u!50 &1083865207
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083865203}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!68 &1083865208
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1083865203}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -493.8266, y: -226.51083}
+  - {x: -109.65704, y: -223.67612}
+  - {x: -110.05441, y: 225.56259}
+  - {x: -493.26224, y: 225.29997}
+  - {x: -494.96753, y: -226.41855}
 --- !u!1 &1130664058
 GameObject:
   m_ObjectHideFlags: 0
