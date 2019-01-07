@@ -24,6 +24,19 @@ table{
 	margin-left: 20px;
 }
 
+.enum-table{
+	margin-right: auto;
+	width: auto;
+	white-space: nowrap;
+}
+
+.enum-table td{
+	width: 100px;
+	border-left: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	padding-left: 5px;
+}
+
 td{
 	display: table-cell;
 	padding-bottom: 3px;
@@ -31,8 +44,16 @@ td{
 	border-bottom: 1px solid #ffffff;
 }
 
+.label tr td label {
+	display: block;
+}
+
 .function-name{
 	color: rgb(124, 199, 109);
+}
+
+.enum-name{
+	color: #77cbd1
 }
 
 .tab{

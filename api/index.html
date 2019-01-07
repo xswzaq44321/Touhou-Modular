@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" href="../imgs/flandre_fly_4.png">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="script.js"></script>
 	<title>東方模組化API</title>
 </head>
 
@@ -13,7 +15,7 @@
 	<h4>
 		以下API皆為從C#分享到lua中的函式
 	</h4>
-	<h2>一些預定好的function</h2>
+	<h2>一些預定好的function、enum</h2>
 	<table>
 		<tbody>
 			<tr>
@@ -26,6 +28,197 @@
 				<td>
 					<span class="function-name">timer.time()</span>
 					<p class="tab">回傳遊戲開始到現在經過的秒數</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">keyPress(int)</span>
+					<p class="tab">回傳指定按鍵是否按下</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="enum-name">KeyCode</span>
+					<p class="tab">按鍵碼的集合 Ex. keyCode.W</p>
+					<table class="enum-table">
+						<tbody class="labels">
+							<tr>
+								<td colspan="2">
+									<label id="keycode">KeyCodes (按我展開)</label>
+								</td>
+							</tr>
+						</tbody>
+						<tbody class="hide">
+							<tr>
+								<td>Keypad0</td>
+								<td>Numeric keypad 0.</td>
+							</tr>
+							<tr>
+								<td>Keypad1</td>
+								<td>Numeric keypad 1.</td>
+							</tr>
+							<tr>
+								<td>Keypad2</td>
+								<td>Numeric keypad 2.</td>
+							</tr>
+							<tr>
+								<td>Keypad3</td>
+								<td>Numeric keypad 3.</td>
+							</tr>
+							<tr>
+								<td>Keypad4</td>
+								<td>Numeric keypad 4.</td>
+							</tr>
+							<tr>
+								<td>Keypad5</td>
+								<td>Numeric keypad 5.</td>
+							</tr>
+							<tr>
+								<td>Keypad6</td>
+								<td>Numeric keypad 6.</td>
+							</tr>
+							<tr>
+								<td>Keypad7</td>
+								<td>Numeric keypad 7.</td>
+							</tr>
+							<tr>
+								<td>Keypad8</td>
+								<td>Numeric keypad 8.</td>
+							</tr>
+							<tr>
+								<td>Keypad9</td>
+								<td>Numeric keypad 9.</td>
+							</tr>
+							<tr>
+								<td>UpArrow</td>
+								<td>Up arrow key.</td>
+							</tr>
+							<tr>
+								<td>DownArrow</td>
+								<td>Down arrow key.</td>
+							</tr>
+							<tr>
+								<td>RightArrow</td>
+								<td>Right arrow key.</td>
+							</tr>
+							<tr>
+								<td>LeftArrow</td>
+								<td>Left arrow key.</td>
+							</tr>
+							<tr>
+								<td>A</td>
+								<td>'a' key.</td>
+							</tr>
+							<tr>
+								<td>B</td>
+								<td>'b' key.</td>
+							</tr>
+							<tr>
+								<td>C</td>
+								<td>'c' key.</td>
+							</tr>
+							<tr>
+								<td>D</td>
+								<td>'d' key.</td>
+							</tr>
+							<tr>
+								<td>E</td>
+								<td>'e' key.</td>
+							</tr>
+							<tr>
+								<td>F</td>
+								<td>'f' key.</td>
+							</tr>
+							<tr>
+								<td>G</td>
+								<td>'g' key.</td>
+							</tr>
+							<tr>
+								<td>H</td>
+								<td>'h' key.</td>
+							</tr>
+							<tr>
+								<td>I</td>
+								<td>'i' key.</td>
+							</tr>
+							<tr>
+								<td>J</td>
+								<td>'j' key.</td>
+							</tr>
+							<tr>
+								<td>K</td>
+								<td>'k' key.</td>
+							</tr>
+							<tr>
+								<td>L</td>
+								<td>'l' key.</td>
+							</tr>
+							<tr>
+								<td>M</td>
+								<td>'m' key.</td>
+							</tr>
+							<tr>
+								<td>N</td>
+								<td>'n' key.</td>
+							</tr>
+							<tr>
+								<td>O</td>
+								<td>'o' key.</td>
+							</tr>
+							<tr>
+								<td>P</td>
+								<td>'p' key.</td>
+							</tr>
+							<tr>
+								<td>Q</td>
+								<td>'q' key.</td>
+							</tr>
+							<tr>
+								<td>R</td>
+								<td>'r' key.</td>
+							</tr>
+							<tr>
+								<td>S</td>
+								<td>'s' key.</td>
+							</tr>
+							<tr>
+								<td>T</td>
+								<td>'t' key.</td>
+							</tr>
+							<tr>
+								<td>U</td>
+								<td>'u' key.</td>
+							</tr>
+							<tr>
+								<td>V</td>
+								<td>'v' key.</td>
+							</tr>
+							<tr>
+								<td>W</td>
+								<td>'w' key.</td>
+							</tr>
+							<tr>
+								<td>X</td>
+								<td>'x' key.</td>
+							</tr>
+							<tr>
+								<td>Y</td>
+								<td>'y' key.</td>
+							</tr>
+							<tr>
+								<td>Z</td>
+								<td>'z' key.</td>
+							</tr>
+							<tr>
+								<td>RightShift</td>
+								<td>Right shift key.</td>
+							</tr>
+							<tr>
+								<td>LeftShift</td>
+								<td>Left shift key.</td>
+							</tr>
+						</tbody>
+					</table>
 				</td>
 			</tr>
 		</tbody>
@@ -49,28 +242,32 @@
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">boss.oddN_way(string load_type, string bullet_type, int odd_N, float interval, float speed,
+					<span class="function-name">boss.oddN_way(string load_type, string bullet_type, int odd_N, float interval, float
+						speed,
 						float initial_radius = 0)</span>
 					<p class="tab">odd number danmaku, automaticly track</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">boss.radiate(string load_type, string bullet_type, int N, float speed, float degree = -90,
+					<span class="function-name">boss.radiate(string load_type, string bullet_type, int N, float speed, float degree =
+						-90,
 						float initial_radius = 0)</span>
 					<p class="tab">radiate danmaku</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">boss.shoot(string load_type, string bullet_type, float posx, float posy, float speed, float
+					<span class="function-name">boss.shoot(string load_type, string bullet_type, float posx, float posy, float speed,
+						float
 						degree)</span>
 					<p class="tab"></p>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">boss.laser(string laser_type, float str_pointx, float str_pointy, float str_pointz, float
+					<span class="function-name">boss.laser(string laser_type, float str_pointx, float str_pointy, float str_pointz,
+						float
 						str_angle, float time, float angle = 0, float angular_speed = 0)</span>
 					<p class="tab"></p>
 				</td>
