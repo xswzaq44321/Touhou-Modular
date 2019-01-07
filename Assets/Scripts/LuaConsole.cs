@@ -106,6 +106,27 @@ public class LuaConsole : MonoBehaviour
 					printMessage("ERROR: " + except.Message, errColor);
 				}
 			}
+			foreach (var obj in (script.Globals["updatelist"] as Table).Values)
+			{
+				if (obj.IsNil())
+					continue;
+				try
+				{
+					DynValue bar = script.Call(obj);
+					if (bar.Tuple[0].Boolean)
+					{
+						script.Call(bar.Tuple[1]);
+					}
+				}
+				catch (InterpreterException luaExcept)
+				{
+					printMessage("LUA ERROR: " + luaExcept.Message, errColor);
+				}
+				catch (Exception except)
+				{
+					printMessage("ERROR: " + except.Message, errColor);
+				}
+			}
 		}
 	}
 
