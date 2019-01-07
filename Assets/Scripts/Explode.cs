@@ -6,6 +6,7 @@ public class Explode : MonoBehaviour {
 
     public bool pause = false;
     public float faded_speed, expand_speed;
+
 	// Use this for initialization
 	void Start () {
         transform.localScale = Vector3.zero;

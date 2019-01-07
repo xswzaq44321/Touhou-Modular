@@ -6,7 +6,7 @@ local way = 1
 
 function boss.upDate()
 	delay = delay + timer.deltaTime
-	radiate();
+	-- radiate();
 end
 
 function radiate()

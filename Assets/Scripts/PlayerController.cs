@@ -130,6 +130,12 @@ public class PlayerController : MonoBehaviour {
         if (HP > max_HP) HP = max_HP;
         if (deltaHP < 0)
         {
+            for(int i = 0; i < 10 && power > 100; i++)
+            {
+                power--;
+                GameObject powerup = Instantiate(Resources.Load("prefab/power") as GameObject);
+                powerup.transform.position = transform.position + new Vector3(Random.Range(-2f, 2f), 1, 0);
+            }
             GameObject explode = Instantiate(Resources.Load("prefab/die") as GameObject);
             explode.transform.position = transform.position;
             GetComponent<AudioSource>().Play();
