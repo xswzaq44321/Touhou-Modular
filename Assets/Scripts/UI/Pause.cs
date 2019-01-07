@@ -35,6 +35,7 @@ public class Pause : MonoBehaviour {
                 transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 transform.GetChild(2).GetComponent<Image>().color = new Color(1, 113f / 255f, 113f / 255f, 1);
                 transform.GetChild(3).GetComponent<Image>().color = new Color(96f / 255f, 96f / 255f, 96f / 255f, 1);
+                transform.GetChild(4).GetComponent<Image>().color = new Color(96f / 255f, 96f / 255f, 96f / 255f, 1);
             }
         }
 
@@ -57,15 +58,25 @@ public class Pause : MonoBehaviour {
 
         if (!pause) return;
         //select//
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+        //select//
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.GetChild(state + 2).GetComponent<Image>().color = new Color(96f / 255f, 96f / 255f, 96f / 255f, 1);
             transform.GetChild(state + 2).GetComponent<RectTransform>().localScale = Vector2.one * 2.25f;
-            state = (state + 1) % 2;
+            state = (state + 1) % 3;
             transform.GetChild(state + 2).GetComponent<Image>().color = new Color(255, 113f / 255f, 113f / 255f, 255);
             transform.GetChild(state + 2).GetComponent<RectTransform>().localScale *= 1.1f;
         }
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            transform.GetChild(state + 2).GetComponent<Image>().color = new Color(96f / 255f, 96f / 255f, 96f / 255f, 1);
+            transform.GetChild(state + 2).GetComponent<RectTransform>().localScale = Vector2.one * 2.25f;
+            state = (state + 2) % 3;
+            transform.GetChild(state + 2).GetComponent<Image>().color = new Color(255, 113f / 255f, 113f / 255f, 255);
+            transform.GetChild(state + 2).GetComponent<RectTransform>().localScale *= 1.1f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             switch (state)
             {
@@ -74,6 +85,9 @@ public class Pause : MonoBehaviour {
                     break;
                 case 1:
                     SceneManager.LoadScene(0);
+                    break;
+                case 2:
+                    Application.Quit();
                     break;
             }
         }
