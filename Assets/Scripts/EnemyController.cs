@@ -89,21 +89,6 @@ public class EnemyController : MonoBehaviour {
         angular_speed = _angular_speed;
     }
 
-	public int getHP()
-	{
-		return HP;
-	}
-
-	public int getMaxHP()
-	{
-		return max_HP;
-	}
-
-	public void setHP(int a)
-	{
-		HP = a;
-	}
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "HitPoint")

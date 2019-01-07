@@ -183,14 +183,14 @@ public class Character
 	}
 	public int getHP()
 	{
-		return body.GetComponent<EnemyController>().getHP();
+		return body.GetComponent<EnemyController>().HP;
 	}
 	public int getMaxHP()
 	{
-		return body.GetComponent<EnemyController>().getMaxHP();
+		return body.GetComponent<EnemyController>().max_HP;
 	}
 	public void setHP(int a)
 	{
-		body.GetComponent<EnemyController>().setHP(a);
+		body.GetComponent<EnemyController>().HP = a;
 	}
 }
