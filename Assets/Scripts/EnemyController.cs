@@ -63,9 +63,6 @@ public class EnemyController : MonoBehaviour {
             if (distance <= 0) moving = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Y))
-            turn(3, 90, 90, -45);
-
         //turning
         if (turning)
         {
