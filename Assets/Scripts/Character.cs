@@ -101,7 +101,28 @@ public class Character
 			"<color=yellow>" +
 			"turn(float radius, float start_angle, float end_angle, float _angular_speed)" +
 			"</color>"
-		}
+		},
+		{
+			"getHP",
+			"<color=yellow>" +
+			"return HP\r\n" +
+			"getHP()" +
+			"</color>"
+		},
+		{
+			"getMaxHP",
+			"<color=yellow>" +
+			"return maximum HP\r\n" +
+			"getMaxHP()" +
+			"</color>"
+		},
+		{
+			"setHP",
+			"<color=yellow>" +
+			"set HP\r\n" +
+			"setHP()" +
+			"</color>"
+		},
 	};
 	public string help =
 		"<color=yellow>" +
@@ -114,6 +135,9 @@ public class Character
 		"my_position()\r\n" + 
 		"move_straight()\r\n" +
 		"turn()\r\n" +
+		"getHP()\r\n" +
+		"getMaxHP()\r\n" + 
+		"setHP()\r\n" +
 		"</color>";
 
 	public Character(GameObject body)
@@ -139,7 +163,7 @@ public class Character
 	}
 	public void laser(string laser_type, float str_pointx, float str_pointy, float str_pointz, float str_angle, float time, float angle = 0, float angular_speed = 0)
 	{
-		body.GetComponent<Danmaku>().laser(laser_type, new Vector3(str_pointx, str_pointy, str_pointz), str_angle, time, angle = 0, angular_speed);
+		body.GetComponent<Danmaku>().laser(laser_type, new Vector3(str_pointx, str_pointy, str_pointz), str_angle, time, angle, angular_speed);
 	}
 	public float player_direction()
 	{
@@ -156,5 +180,17 @@ public class Character
 	public void turn(float radius, float start_angle, float end_angle, float _angular_speed)
 	{
 		body.GetComponent<EnemyController>().turn(radius, start_angle, end_angle, _angular_speed);
+	}
+	public int getHP()
+	{
+		return body.GetComponent<EnemyController>().getHP();
+	}
+	public int getMaxHP()
+	{
+		return body.GetComponent<EnemyController>().getMaxHP();
+	}
+	public void setHP(int a)
+	{
+		body.GetComponent<EnemyController>().setHP(a);
 	}
 }
