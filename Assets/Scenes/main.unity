@@ -1105,6 +1105,16 @@ Prefab:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 114128464018548592, guid: a6a289b3ad039274d841d23b33209ce4,
+        type: 2}
+      propertyPath: HP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114128464018548592, guid: a6a289b3ad039274d841d23b33209ce4,
+        type: 2}
+      propertyPath: max_HP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
   m_IsPrefabParent: 0
@@ -5701,6 +5711,16 @@ Prefab:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 114128464018548592, guid: a6a289b3ad039274d841d23b33209ce4,
+        type: 2}
+      propertyPath: max_HP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114128464018548592, guid: a6a289b3ad039274d841d23b33209ce4,
+        type: 2}
+      propertyPath: HP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6a289b3ad039274d841d23b33209ce4, type: 2}
   m_IsPrefabParent: 0
@@ -6676,7 +6696,7 @@ MonoBehaviour:
   item: power
   die: explode_orange
   max_HP: 100000
-  HP: 10000
+  HP: 100000
   item_num: 30
   console: {fileID: 0}
   pause: 0
