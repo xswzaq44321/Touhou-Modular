@@ -5,7 +5,7 @@ using UnityEngine;
 public class Load : MonoBehaviour {
 
     public float initial_scale;
-    private string bullet_type;
+    private string bullet_type = "";
     private float speed, direction;
     public bool pause = false;
 
@@ -29,9 +29,12 @@ public class Load : MonoBehaviour {
         GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 8) * Time.deltaTime;
         if (transform.localScale.x <= 2)
         {
-            GameObject bullet = Instantiate(Resources.Load("prefab/" + bullet_type) as GameObject);
-            bullet.transform.position = transform.position;
-            bullet.GetComponent<Shoot>().set_shoot(direction, speed);
+            if(bullet_type != "")
+            {
+                GameObject bullet = Instantiate(Resources.Load("prefab/" + bullet_type) as GameObject);
+                bullet.transform.position = transform.position;
+                bullet.GetComponent<Shoot>().set_shoot(direction, speed);
+            }
             Destroy(gameObject);
         }
     }
