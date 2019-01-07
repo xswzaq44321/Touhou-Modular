@@ -247,7 +247,6 @@ public class LuaConsole : MonoBehaviour
 		newMessage.textObject.text = newMessage.text;
 		messageList.Add(newMessage);
 		verticleScrollBar.value = 0f;
-		Debug.Log(newMessage.textObject.rectTransform.sizeDelta.x);
 	}
 	/// <summary>
 	/// print message to lua console

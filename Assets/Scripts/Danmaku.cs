@@ -98,10 +98,17 @@ public class Danmaku : MonoBehaviour {
         }
     }
 
-    /* 1. use as even number danmaku, cannot track
-     * 2. use as single bullet, ex: evenN_way("load_type", "bullet_type", 1, 0, speed, degree);
-     * 3. use as circle, ex: evenN_way("load_type", "bullet_type", evenN, 360 / evenN, speed, 0, 3, angle); */
-    public void evenN_way(string load_type, string bullet_type, int even_N, float interval, float speed, float degree = -90, float initial_radius = 0, float direction = 0)
+	/// <summary>
+	/// shoot even number danmaku
+	/// </summary>
+	/// <param name="load_type">type of visual effect, usually ends with _load</param>
+	/// <param name="bullet_type">type of bullet</param>
+	/// <param name="even_N">how many bullets per circle (odd num)</param>
+	/// <param name="interval">the angle(deg) between every bullet</param>
+	/// <param name="speed">speed of bullet</param>
+	/// <param name="degree">angle(deg) of the middle bullet</param>
+	/// <param name="initial_radius">the danmaku circle's radius</param>
+	public void evenN_way(string load_type, string bullet_type, int even_N, float interval, float speed, float degree = -90, float initial_radius = 0, float direction = 0)
     {
         direction *= Mathf.Deg2Rad;
         for (int i = 0; i < even_N; i++)
@@ -114,8 +121,16 @@ public class Danmaku : MonoBehaviour {
         }
     }
 
-    //odd number danmaku, automaticly track//
-    public void oddN_way(string load_type, string bullet_type, int odd_N, float interval, float speed, float initial_radius = 0)
+	/// <summary>
+	/// shoot odd number danmaku, the middle bullet will automatically track player
+	/// </summary>
+	/// <param name="load_type">type of visual effect, usually ends with _load</param>
+	/// <param name="bullet_type">type of bullet</param>
+	/// <param name="odd_N">how many bullets per circle (odd num)</param>
+	/// <param name="interval">the angle(deg) between every bullet</param>
+	/// <param name="speed">speed of bullet</param>
+	/// <param name="initial_radius">the danmaku circle's radius</param>
+	public void oddN_way(string load_type, string bullet_type, int odd_N, float interval, float speed, float initial_radius = 0)
     {
         for (int i = 0; i < odd_N; i++)
         {
@@ -127,8 +142,16 @@ public class Danmaku : MonoBehaviour {
         }
     }
 
-    //radiate danmaku//
-    public void radiate(string load_type, string bullet_type, int N, float speed, float degree = -90, float initial_radius = 0)
+	/// <summary>
+	/// radiate danmaku
+	/// </summary>
+	/// <param name="load_type">type of visual effect, usually ends with _load</param>
+	/// <param name="bullet_type">type of bullet</param>
+	/// <param name="N">how many bullets per circle</param>
+	/// <param name="speed">speed of bullet</param>
+	/// <param name="degree">angle(deg) of the first bullet</param>
+	/// <param name="initial_radius">the danmaku circle's radius</param>
+	public void radiate(string load_type, string bullet_type, int N, float speed, float degree = -90, float initial_radius = 0)
     {
         for(int i = 0; i < N; i++)
         {
@@ -140,16 +163,31 @@ public class Danmaku : MonoBehaviour {
         }
     }
 
-    public void shoot(string load_type, string bullet_type, Vector2 pos, float speed, float degree)
+	/// <summary>
+	/// for single bullet
+	/// </summary>
+	/// <param name="load_type">type of visual effect, usually ends with _load</param>
+	/// <param name="bullet_type">type of bullet</param>
+	/// <param name="pos">initial position of bullet</param>
+	/// <param name="speed">speed of bullet</param>
+	/// <param name="degree">the direction bullet flys (deg)</param>
+	public void shoot(string load_type, string bullet_type, Vector2 pos, float speed, float degree)
     {
         bullet = Instantiate(Resources.Load("prefab/" + load_type) as GameObject);
         bullet.transform.position = pos;
         bullet.GetComponent<Load>().set_bullet(bullet_type, speed, degree);
     }
 
-
-    //laser//
-    public void laser(string laser_type, Vector3 str_point, float str_angle, float time, float angle = 0, float angular_speed = 0)
+	/// <summary>
+	/// for laser that sticks with the transform
+	/// </summary>
+	/// <param name="laser_type">type of laser</param>
+	/// <param name="str_point">where the laser starts</param>
+	/// <param name="str_angle">initial angle(deg) of the laser</param>
+	/// <param name="time">how long will the laser last(doesn't include the time it generates or rotates</param>
+	/// <param name="angle">how much will you want to rotate (deg)</param>
+	/// <param name="angular_speed">rotate at speed (deg/sec), counterclockwise as positive</param>
+	public void laser(string laser_type, Vector3 str_point, float str_angle, float time, float angle = 0, float angular_speed = 0)
     {
         bullet = Instantiate(Resources.Load("prefab/" + laser_type) as GameObject);
         bullet.transform.parent = transform;
@@ -159,8 +197,11 @@ public class Danmaku : MonoBehaviour {
             bullet.GetComponent<Laser>().set_rotate(angle, angular_speed);
     }
 
-    //return the angle between pos and player//
-    public float player_direction(Transform pos)
+	/// <summary>
+	/// return the angle(deg) between pos and player
+	/// </summary>
+	/// <returns></returns>
+	public float player_direction(Transform pos)
     {
         Vector2 direction = transform.parent.GetComponent<Player>().sprite.transform.GetChild(0).position - pos.position;
         float angle = Vector2.Angle(direction, transform.right);
