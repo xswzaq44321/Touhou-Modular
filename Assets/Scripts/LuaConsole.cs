@@ -18,6 +18,7 @@ public class LuaConsole : MonoBehaviour
 	public GameObject panel;
 	public GameObject boss;
 	public List<GameObject> minions;
+	public GameObject player;
 	List<string> prevCommands;
 	int prevCommandsIter;
 	List<string> helpMessageList = new List<string>();
@@ -161,6 +162,17 @@ public class LuaConsole : MonoBehaviour
 		}
 
 		doFile(Application.streamingAssetsPath + "/scripts/minion/postControl.lua");
+
+		var playerT = DynValue.NewTable(script);
+		playerT.Table["addHP"] = (Action<int>)((a) =>
+		{
+			player.GetComponent<PlayerController>().addHP(a);
+		});
+		playerT.Table["setPos"] = (Action<float, float, float>)((x, y, z) =>
+		{
+			player.transform.position = new Vector3(x, y, z);
+		});
+		script.Globals["player"] = playerT;
 	}
 
 	void setUpScriptFunc()

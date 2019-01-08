@@ -2386,6 +2386,7 @@ MonoBehaviour:
   panel: {fileID: 585095593}
   boss: {fileID: 2002526181}
   minions: []
+  player: {fileID: 1131732177}
 --- !u!114 &574155170
 MonoBehaviour:
   m_ObjectHideFlags: 0
