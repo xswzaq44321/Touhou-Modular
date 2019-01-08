@@ -16,35 +16,70 @@
 		在StreamingAssets/scripts/flandre資料夾底下有個檔案叫做control.lua，該檔案就是控制boss行為的檔案。<br>
 		而其中有個很重要的函式是<span class="function-name">boss.upDate()</span>，這個函式在每幀執行時都會呼叫一次。<br>
 		範例如下:<br>
-		<pre><code class="language-lua line-numbers">local count = 0
-local a = 0
+		<pre><code class="language-lua line-numbers">local radiate
 
-local radiate
-
-function boss.upDate()
-	radiate()
-end
-
-function radiate()
-	count = count + timer.deltaTime
-	if(count > 3)then
-		if(count > 3.5)then
-			count = 0
-			a = 0
+boss = {
+	delay = 0,
+	a = 0,
+	way = 1,
+	obj,
+	baseUpDate = function()
+		boss.delay = boss.delay + timer.deltaTime
+		if (boss.death) then
+			boss.upDate = function()
+				-- nothing
+			end
 		end
-		a = a + 0.5
-		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, a * 11, 2 - a * 0.01)
-		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, -a * 11, 2 - a * 0.01)
+	end,
+	upDate = function()
+		radiate()
+	end
+}
 
-		if(a < 50)then
-			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, a * 11 + 180, 1.5 - a * 0.02);
-			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, -a * 11 + 180, 1.5 - a * 0.02);
+radiate = function()
+	if (boss.delay > 3) then
+		if (boss.delay > 3.5) then
+			boss.delay = 0
+			boss.a = 0
+		end
+		boss.a = boss.a + 0.5
+		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, boss.a * 11, 2 - boss.a * 0.01)
+		boss.radiate("pink_load", "pink_circle_small", 1, 4.4, -boss.a * 11, 2 - boss.a * 0.01)
+
+		if (boss.a < 50) then
+			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, boss.a * 11 + 180, 1.5 - boss.a * 0.02)
+			boss.radiate("cyan_load", "cyan_seed", 1, 1.4, -boss.a * 11 + 180, 1.5 - boss.a * 0.02)
 		end
 	end
 end</code></pre>
-		第1,2行宣告出區域變數count, a用做計數功能，然後第4行預先宣告一個函式radiate，在upDate中每幀都呼叫。<br>
-		第10行定義radiate函式的內容，令boss等待3秒，然後每幀"輻射"出一對子彈，直到第3.5秒，然後再重新計數。
+		第1行預先宣告一個函式radiate，在upDate中每幀都呼叫。<br>
+		第3行宣告一個boss物件，其中delay用作計數用途，obj用來儲存在C#中的物件實體。<br>
+		boss內可以再另外宣告自己的變數等等。<br>
+		第8行baseUpDate為預定函式，don't touch。<br>
+		第16行upDate為每幀都會呼叫的函式，通常boss的動作都會寫在這裡。
+		第21行定義radiate函式的內容，令boss等待3秒，然後每幀"輻射"出一對子彈，直到第3.5秒，然後再重新計數。
 	</p>
+	<hr>
+	<div class="right-vid">
+		<p>
+			在遊戲執行中你也可以動態改變boss的動作。<br>
+			你可以把下面的程式碼複製貼上於console裡面並執行。<br>
+			<video src="../vids/Touhou Modular dynamic change.mp4" class="inside-vid" autoplay muted loop></video>
+			<pre><code class="language-lua line-numbers">laser = function(tabl)
+	if (tabl.delay >= 0.2) then
+		local x, y, z = tabl.my_position()
+		tabl.laser("red_laser", x, y, z, tabl.player_direction() + math.random(-15, 15), 1)
+		tabl.delay = 0
+	end
+end
+
+boss.upDate = function()
+	laser(boss)
+end</code></pre>
+			第1行宣告laser函式，用於發射雷射。
+			第9行重新定義boss.upDate函式內容。
+		</p>
+	</div>
 	<script src="../prism.js"></script>
 </body>
 
