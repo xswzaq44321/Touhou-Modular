@@ -12,9 +12,6 @@
 
 <body>
 	<h1>東方模組化API</h1>
-	<h4>
-		以下API皆為從C#分享到lua中的函式
-	</h4>
 	<h2>一些預定好的function、enum</h2>
 	<table>
 		<tbody>
@@ -32,14 +29,18 @@
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">keyPress(int)</span>
-					<p class="tab">回傳指定按鍵是否按下</p>
+					<span class="function-name">keyPress(int code)</span>
+					<p class="tab">回傳指定按鍵是否按下，按鍵碼參照下方</p>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="enum-name">KeyCode</span>
-					<p class="tab">按鍵碼的集合 Ex. keyCode.W</p>
+					<p class="tab">
+						按鍵碼的集合，用法與C#中基本無二致<br>
+						Ex. KeyCode.W<br>
+						以下只列出部分代碼，更多請參照unity官網
+					</p>
 					<table class="enum-table">
 						<tbody class="labels">
 							<tr>
@@ -221,6 +222,19 @@
 					</table>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<span class="function-name">setInterval(function foo, float time)</span>
+					<p class="tab">類似javascript中的setInterval，指定每幾秒執行一次委派的函式<br>
+						回傳本次註冊的interval代碼，可用於clearInterval中</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">clearInterval(int id)</span>
+					<p class="tab">清除指定代號的interval物件</p>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<h2>Boss 的 function</h2>
@@ -233,55 +247,149 @@
 			<tr>
 				<td>
 					<span class="function-name">boss.evenN_way(string load_type, string bullet_type, int even_N, float interval, float
-						speed, float degree = -90, float initial_radius = 0, float direction = 0)</span>
-					<p class="tab">1. use as even number danmaku, cannot track<br>
-						2. use as single bullet, ex: evenN_way("load_type", "bullet_type", 1, 0, speed, degree);<br>
-						3. use as circle, ex: evenN_way("load_type", "bullet_type", evenN, 360 / evenN, speed, 0, 3, angle);<br>
-					</p>
+						speed, float degree = -90, float initial_radius = 0, float direction = 0)</span><br>
+					<span class="tab">shoot even number danmaku</span>
+					<ul>
+						<li>
+							load_type: type of visual effect, usually ends with _load
+						</li>
+						<li>
+							bullet_type: type of bullet
+						</li>
+						<li>
+							interval: the angle(deg) between every bullet
+						</li>
+						<li>
+							speed: speed of bullet
+						</li>
+						<li>
+							degree: angle(deg) of the middle bullet
+						</li>
+						<li>
+							initial_radius: the danmaku circle's radius
+						</li>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="function-name">boss.oddN_way(string load_type, string bullet_type, int odd_N, float interval, float
 						speed,
-						float initial_radius = 0)</span>
-					<p class="tab">odd number danmaku, automaticly track</p>
+						float initial_radius = 0)</span><br>
+					<span class="tab">shoot odd number danmaku, the middle bullet will automatically track player</span>
+					<ul>
+						<li>load_type: type of visual effect, usually ends with _load</li>
+						<li>bullet_type: type of bullet</li>
+						<li>odd_N: how many bullets per circle (odd num)</li>
+						<li>interval: the angle(deg) between every bullet</li>
+						<li>speed: speed of bullet</li>
+						<li>initial_radius: the danmaku circle's radius</li>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="function-name">boss.radiate(string load_type, string bullet_type, int N, float speed, float degree =
 						-90,
-						float initial_radius = 0)</span>
-					<p class="tab">radiate danmaku</p>
+						float initial_radius = 0)</span><br>
+					<span class="tab">radiate danmaku</span>
+					<ul>
+						<li>load_type: type of visual effect, usually ends with _load</li>
+						<li>bullet_type: type of bullet</li>
+						<li>N: how many bullets per circle</li>
+						<li>speed: speed of bullet</li>
+						<li>degree: angle(deg) of the first bullet</li>
+						<li>initial_radius: the danmaku circle's radius</li>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="function-name">boss.shoot(string load_type, string bullet_type, float posx, float posy, float speed,
 						float
-						degree)</span>
-					<p class="tab"></p>
+						degree)</span><br>
+					<span class="tab">for single bullet</span>
+					<ul>
+						<li>load_type: type of visual effect, usually ends with _load</li>
+						<li>bullet_type: type of bullet</li>
+						<li>posx, posy: initial position of bullet</li>
+						<li>speed: speed of bullet</li>
+						<li>degree: the direction bullet flys (deg)</li>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="function-name">boss.laser(string laser_type, float str_pointx, float str_pointy, float str_pointz,
 						float
-						str_angle, float time, float angle = 0, float angular_speed = 0)</span>
-					<p class="tab"></p>
+						str_angle, float time, float angle = 0, float angular_speed = 0)</span><br>
+					<span class="tab">for laser that sticks with the transform</span>
+					<ul>
+						<li>laser_type: type of laser</li>
+						<li>str_pointx, str_pointy, str_pointz: where the laser starts</li>
+						<li>str_angle: initial angle(deg) of the laser</li>
+						<li>time: how long will the laser last(doesn't include the time it generates or rotates</li>
+						<li>angle: how much will you want to rotate (deg)</li>
+						<li>angular_speed: rotate at speed (deg/sec), counterclockwise as positive</li>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<span class="function-name">boss.move_straight(float angle, float _distance, float _speed)</span>
-					<p class="tab">move to specific distance</p>
+					<span class="function-name">boss.player_direction()</span><br>
+					<span class="tab">return the angle(deg) between pos and player</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.my_position()</span><br>
+					<span class="tab">return three number representing obj position in x, y, z</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.move_straight(float angle, float _distance, float _speed)</span><br>
+					<span class="tab">move to specific distance</span>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<span class="function-name">boss.turn(float radius, float start_angle, float end_angle, float _angular_speed)</span>
-					<p class="tab"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.getHP()</span><br>
+					<span class="tab">return HP</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.getMaxHP()</span><br>
+					<span class="tab">return maximum HP</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">boss.setHP(int amount)</span><br>
+					<span class="tab">set HP</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<h2>player的function</h2>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<span class="function-name">player.addHP(int amount)</span><br>
+					<span class="tab">add specific amount of health to player</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="function-name">player.setPos(int x, int y, int z)</span><br>
+					<span class="tab">set player position to (x, y, z)</span>
 				</td>
 			</tr>
 		</tbody>
