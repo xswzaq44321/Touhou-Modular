@@ -9,7 +9,7 @@ public class UI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player_info = GetComponent<Player>().sprite.GetComponent<PlayerController>();
+        player_info = GetComponent<Control>().sprite.GetComponent<PlayerController>();
 	}
 	
 	// Update is called once per frame
