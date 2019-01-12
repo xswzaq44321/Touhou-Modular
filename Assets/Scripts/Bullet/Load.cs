@@ -7,10 +7,12 @@ public class Load : MonoBehaviour {
     public float initial_scale;
     private string bullet_type = "";
     private float speed, direction;
-    public bool pause = false;
+    public GameObject Pause;
 
 	// Use this for initialization
 	void Start () {
+        Pause = GameObject.Find("Pause");
+
         transform.localScale = Vector3.one * initial_scale;
         GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
     }
@@ -18,11 +20,7 @@ public class Load : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //load//
         transform.localScale -= Vector3.one * (initial_scale - 2) * 7 * Time.deltaTime;

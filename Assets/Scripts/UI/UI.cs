@@ -58,5 +58,16 @@ public class UI : MonoBehaviour {
             transform.GetChild(4).GetChild(6).GetComponent<RawImage>().texture = Resources.Load("UI/blank_dot") as Texture;
         for (; i < 6; i++)
             transform.GetChild(4).GetChild(i).GetComponent<RawImage>().texture = Resources.Load("UI/blank_num") as Texture;
+
+        //fraze//
+        int graze = player_info.graze;
+        for (i = 0; i < 6 && graze > 0; i++, graze /= 10)
+            transform.GetChild(5).GetChild(i).GetComponent<RawImage>().texture = Resources.Load("UI/" + (graze % 10).ToString()) as Texture;
+        if (i > 3)
+            transform.GetChild(5).GetChild(6).GetComponent<RawImage>().texture = Resources.Load("UI/comma") as Texture;
+        else
+            transform.GetChild(5).GetChild(6).GetComponent<RawImage>().texture = Resources.Load("UI/blank_dot") as Texture;
+        for (; i < 6; i++)
+            transform.GetChild(5).GetChild(i).GetComponent<RawImage>().texture = Resources.Load("UI/blank_num") as Texture;
     }
 }
