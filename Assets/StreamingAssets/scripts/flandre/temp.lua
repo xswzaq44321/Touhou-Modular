@@ -1,105 +1,80 @@
-local radiate, laser, radiate2, laser2, shoot, moveRight, moveLeft, laser3
-
-boss = {
-	delay = 0,
-	a = 0,
-	way = 1,
-	tempState = 0,
-	obj,
-	b = -1,
-	flag = 1,
-	baseUpDate = function()
-		boss.delay = boss.delay + timer.deltaTime
-		if (boss.death) then
-			boss.upDate = function()
-				-- nothing
-			end
-		end
-	end,
-	upDate = function()
-		if(boss.flag==1 and boss.delay <= 15)then
-			return
-		elseif(boss.flag == 1 and boss.delay >= 15)then
-			boss.delay = 0
-			boss.flag = 0
-		end
-		local percent = boss.getHP() / boss.getMaxHP()
-		if (percent >= 0.9) then
-			if (boss.delay > 3) then
-				radiate(boss)
-				if (boss.delay > 5) then
-					boss.delay = 0
-					boss.a = 0
-				end
-			end
-		elseif (percent < 0.9 and percent >= 0.8) then
-			if (boss.delay >= 0.5) then
-				laser(boss)
-				boss.delay = 0
-			end
-		elseif (percent < 0.8 and percent >= 0.7) then
-			if (boss.delay >= 3) then
-				radiate2(boss)
-				if (boss.delay > 4) then
-					boss.delay = 0
-					boss.a = 0
-				end
-			end
-		elseif (percent < 0.7 and percent >= 0.6) then
-			if (boss.delay >= 4) then
-				laser2(boss)
-				boss.delay = 0
-			end
-		elseif (percent < 0.6 and percent >= 0.5) then
-			if (math.floor(boss.delay / timer.deltaTime) % 2 == 1) then
-				shoot(boss)
-			end
-			if (boss.delay >= 1) then
-				if (math.random(0, 1) == 0) then
-					moveRight(boss)
-				else
-					moveLeft(boss)
-				end
+boss.upDate = function()
+	local percent = boss.getHP() / boss.getMaxHP()
+	if (percent >= 0.9) then
+		if (boss.delay > 3) then
+			radiate(boss)
+			if (boss.delay > 5) then
 				boss.delay = 0
 				boss.a = 0
 			end
-		elseif (percent < 0.5 and percent >= 0.4) then
-			if (boss.delay >= 10) then
-				laser3(boss)
+		end
+	elseif (percent < 0.9 and percent >= 0.8) then
+		if (boss.delay >= 0.5) then
+			laser(boss)
+			boss.delay = 0
+		end
+	elseif (percent < 0.8 and percent >= 0.7) then
+		if (boss.delay >= 3) then
+			radiate2(boss)
+			if (boss.delay > 4) then
+				boss.delay = 0
+				boss.a = 0
+			end
+		end
+	elseif (percent < 0.7 and percent >= 0.6) then
+		if (boss.delay >= 4) then
+			laser2(boss)
+			boss.delay = 0
+		end
+	elseif (percent < 0.6 and percent >= 0.5) then
+		if (math.floor(boss.delay / timer.deltaTime) % 2 == 1) then
+			shoot(boss)
+		end
+		if (boss.delay >= 1) then
+			if (math.random(0, 1) == 0) then
+				moveRight(boss)
+			else
+				moveLeft(boss)
+			end
+			boss.delay = 0
+			boss.a = 0
+		end
+	elseif (percent < 0.5 and percent >= 0.4) then
+		if (boss.delay >= 10) then
+			laser3(boss)
+			boss.delay = 0
+		end
+	elseif (percent < 0.4 and percent >= 0.3) then
+		shoot(boss)
+		if (boss.delay >= 3.5) then
+			radiate2(boss)
+			if (boss.delay >= 4) then
 				boss.delay = 0
 			end
-		elseif (percent < 0.4 and percent >= 0.3) then
-			shoot(boss)
-			if (boss.delay >= 3.5) then
+		end
+	elseif (percent < 0.3 and percent >= 0.2) then
+		if (boss.delay >= 3) then
+			radiate3(boss)
+			if (boss.delay > 3.5) then
+				boss.delay = 0
+				boss.a = 0
+			end
+		end
+	else
+		if (boss.delay >= 3) then
+			if (boss.tempState == 0) then
+				radiate(boss)
+			else
 				radiate2(boss)
-				if (boss.delay >= 4) then
-					boss.delay = 0
-				end
 			end
-		elseif (percent < 0.3 and percent >= 0.2) then
-			if (boss.delay >= 3) then
-				radiate3(boss)
-				if (boss.delay > 3.5) then
-					boss.delay = 0
-					boss.a = 0
-				end
-			end
-		else
-			if (boss.delay >= 3) then
-				if (boss.tempState == 0) then
-					radiate(boss)
-				else
-					radiate2(boss)
-				end
-				if (boss.delay >= 3.5) then
-					boss.delay = 0
-					boss.a = 0
-					boss.tempState = 1 - boss.tempState
-				end
+			if (boss.delay >= 3.5) then
+				boss.delay = 0
+				boss.a = 0
+				boss.tempState = 1 - boss.tempState
 			end
 		end
 	end
-}
+end
 
 radiate = function(tabl)
 	tabl.a = tabl.a + 6 / 11
