@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour {
 
     private int state = 0;
-    private float effect = 0;
-    private bool pause = false;
+    public bool pause = false;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +43,7 @@ public class Pause : MonoBehaviour {
         {
             for(int i = 1; i < transform.childCount; i++)
                 transform.GetChild(i).GetComponent<RectTransform>().localScale += Vector3.up * 4.5f * Time.deltaTime;
+            return;
         }
         else if(!pause && transform.GetChild(1).GetComponent<RectTransform>().localScale.y > 0)
         {
@@ -57,7 +57,7 @@ public class Pause : MonoBehaviour {
         }
 
         if (!pause) return;
-        //select//
+
         //select//
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {

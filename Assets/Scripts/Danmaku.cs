@@ -125,7 +125,7 @@ public class Danmaku : MonoBehaviour
 	/// <returns></returns>
 	public float player_direction(Transform pos)
 	{
-		Vector2 direction = transform.parent.GetComponent<Player>().sprite.transform.GetChild(0).position - pos.position;
+		Vector2 direction = transform.parent.GetComponent<Control>().sprite.transform.GetChild(0).position - pos.position;
 		float angle = Vector2.Angle(direction, transform.right);
 		return (Vector2.Dot(direction, transform.up) >= 0) ? angle : -angle;
 	}

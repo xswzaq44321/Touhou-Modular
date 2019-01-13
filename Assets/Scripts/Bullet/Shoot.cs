@@ -7,21 +7,17 @@ public class Shoot : MonoBehaviour {
     public Vector3 direction;
     public float speed;
     public int atk = 1;
-    public bool pause = false;
+    public GameObject Pause;
 
 	// Use this for initialization
 	void Start () {
-		
+        Pause = GameObject.Find("Pause");
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         transform.position += direction.normalized * speed * Time.deltaTime;
         /*only destroy the one that surpass the upper screen,

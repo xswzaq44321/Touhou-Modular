@@ -165,6 +165,8 @@ MonoBehaviour:
   max_HP: 5
   HP: 1
   item_num: 1
+  console: {fileID: 0}
+  Pause: {fileID: 0}
 --- !u!114 &114512860094129748
 MonoBehaviour:
   m_ObjectHideFlags: 1

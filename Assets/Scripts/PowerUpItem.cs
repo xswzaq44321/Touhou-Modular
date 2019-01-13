@@ -6,21 +6,18 @@ public class PowerUpItem : MonoBehaviour {
 
     public float init_speed;
     public int effect = 1;
-    public bool pause = false;
+    public GameObject Pause;
 
 	// Use this for initialization
 	void Start () {
+        Pause = GameObject.Find("Pause");
         init_speed += Random.Range(-2f, 2f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //falling//
         init_speed += (-9.8f - init_speed * 1.5f) * Time.deltaTime;

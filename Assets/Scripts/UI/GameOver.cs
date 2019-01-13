@@ -10,7 +10,7 @@ public class GameOver : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        transform.GetChild(0).GetComponent<Image>().color = new Color(39f/ 255f, 38f/ 255f, 53f / 255f, 0.8f);
         transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 1);
         transform.GetChild(2).GetComponent<Image>().color = new Color(1, 113f / 255f, 113f / 255f, 1);
         transform.GetChild(3).GetComponent<Image>().color = new Color(96f / 255f, 96f / 255f, 96f / 255f, 1);
@@ -25,6 +25,7 @@ public class GameOver : MonoBehaviour {
         {
             for(int i = 1; i < transform.childCount; i++)
                 transform.GetChild(i).GetComponent<RectTransform>().localScale += Vector3.up * 4.5f * Time.deltaTime;
+            return;
         }
 
         //select//

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Background : MonoBehaviour {
 
     public float speed, mist_speed;
-    public bool pause = false;
+    public GameObject Pause;
 	// Use this for initialization
 	void Start () {
         //Debug.Log(transform.GetChild(1).GetComponent<Image>().sprite.rect.height);
@@ -17,11 +17,7 @@ public class Background : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //move the background//
         transform.GetChild(0).position += Vector3.down * speed * Time.deltaTime;

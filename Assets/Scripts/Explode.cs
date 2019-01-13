@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour {
 
-    public bool pause = false;
+    public GameObject Pause;
     public float faded_speed, expand_speed;
 
 	// Use this for initialization
 	void Start () {
+        Pause = GameObject.Find("Pause");
+
         transform.localScale = Vector3.zero;
         transform.Rotate(0, 0, Random.Range(0, 360));
     }
@@ -16,11 +18,7 @@ public class Explode : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //explode//
         if (transform.GetComponent<SpriteRenderer>().color.a > 0)

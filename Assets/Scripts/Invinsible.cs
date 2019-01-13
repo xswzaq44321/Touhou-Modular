@@ -7,10 +7,12 @@ public class Invinsible : MonoBehaviour {
     private float start_time, flash_time = 0, collider_radius;
     public float invinsible_time = 5;
     private Vector2 reset;
-    public bool pause = false;
+    public GameObject Pause;
 
 	// Use this for initialization
 	void Start () {
+        Pause = GameObject.Find("Pause");
+
         start_time = Time.time;
         reset = transform.GetChild(0).GetComponent<CircleCollider2D>().offset;
         transform.GetChild(0).GetComponent<CircleCollider2D>().offset = Vector2.one * -100;
@@ -19,11 +21,7 @@ public class Invinsible : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = pause ? false : true;
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //flash//
         flash_time += Time.deltaTime;

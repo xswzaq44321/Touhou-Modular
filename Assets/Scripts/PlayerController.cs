@@ -8,10 +8,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject normal_bullet, trace_bullet, enemy;
     private GameObject bullet;
     private Vector3 direction;
-    private float delay_time_short = 0, delay_time_long = 0, delay_bomb_time = 0;
+    private float delay_time_short = 0, delay_time_long = 0, delay_bomb_time = 0, delay_graze_time = 0;
     public int power = 15, point = 0, graze = 0, max_HP, HP, score, bomb = 3;
     private int bomb_count = 0;
-    public bool pause = false;
     public Canvas gameover, Pause;
 	// Use this for initialization
 	void Start () {
@@ -21,20 +20,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //pause//
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (pause)
-            {
-                pause = false;
-                GetComponent<Animator>().speed = 1;
-            }
-            else
-            {
-                pause = true;
-                GetComponent<Animator>().speed = 0;
-            }
-        }
-        if (pause) return;
+        if (Pause.GetComponent<Pause>().pause) return;
 
         //move//
         direction = Vector3.zero;
@@ -156,9 +142,14 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.tag == "EnemyBullet") graze++;
+        if (col.tag == "EnemyBullet")
+        {
+            if (delay_graze_time == 0) graze++;
+            delay_graze_time += Time.deltaTime;
+            if (delay_graze_time >= 0.5f) delay_graze_time = 0;
+        }
     }
 
     public void addHP(int deltaHP)
@@ -181,6 +172,7 @@ public class PlayerController : MonoBehaviour {
         if (HP < 0)
         {
             gameover.gameObject.AddComponent<GameOver>();
+            Pause.GetComponent<Pause>().pause = true;
             Pause.GetComponent<Pause>().enabled = false;
             Destroy(gameObject);
         }
